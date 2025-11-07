@@ -293,5 +293,3 @@ Built with:
 ---
 
 **Made with ❤️ for developers who want to shine**
-
-For questions or support, contact: [your-email@example.com]

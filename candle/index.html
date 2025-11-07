@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Candle Showcase</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Creative Candle Showcase</h1>
+        <p class="subtitle">Light the candle to reveal creative posts</p>
+        
+        <div class="workspace">
+            <div class="candle-container">
+                <div class="candle">
+                    <div class="wick"></div>
+                    <div class="flame"></div>
+                </div>
+                <div class="smoke"></div>
+                <div class="post-container">
+                    <div class="post-image">Post Image</div>
+                    <h3 class="post-title">Post Title</h3>
+                    <p class="post-excerpt">This is a brief excerpt from the post...</p>
+                </div>
+            </div>
+            
+            <div class="tools">
+                <div class="torch" id="torch">
+                    <div class="torch-flame"></div>
+                    <div class="torch-body"></div>
+                    <div class="tool-label">Drag to light</div>
+                </div>
+                
+                <div class="water-bucket" id="water-bucket">
+                    <div class="bucket">
+                        <div class="water"></div>
+                    </div>
+                    <div class="tool-label">Drag to extinguish</div>
+                </div>
+            </div>
+            
+            <div class="instructions">
+                <p>Drag the torch to the candle to light it. After 3 seconds, smoke will appear with a post preview. Click the smoke to view the full post. Drag the water bucket to extinguish the candle and reveal the next post.</p>
+            </div>
+            
+            <div class="counter">
+                Post <span id="current-post">1</span> of <span id="total-posts">5</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="post-modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-modal">&times;</button>
+            <h2 class="modal-title" id="modal-title">Post Title</h2>
+            <div class="modal-image" id="modal-image">Post Image</div>
+            <div class="modal-body" id="modal-body">
+                <p>This is the full content of the post. In a real implementation, this would contain the complete article, project details, or creative work being showcased.</p>
+                <p>Users can replace this content with their own posts, images, and descriptions to create their personalized showcase.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom, #1a1a2e, #16213e);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 10px;
+    color: #e94560;
+    text-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
+}
+
+.subtitle {
+    margin-bottom: 30px;
+    color: #8f8f8f;
+}
+
+.workspace {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.candle-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.candle {
+    position: relative;
+    width: 60px;
+    height: 200px;
+    background: linear-gradient(to right, #f8f8f8, #e0e0e0, #f8f8f8);
+    border-radius: 5px;
+    box-shadow: inset -5px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.candle::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 40px;
+    background: #f8f8f8;
+    border-radius: 50% 50% 20% 20%;
+}
+
+.wick {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 15px;
+    background: #333;
+    border-radius: 2px;
+}
+
+.flame {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 50px;
+    background: linear-gradient(to top, #ff9800, #ff5722, #ff9800);
+    border-radius: 50% 50% 20% 20%;
+    box-shadow: 0 0 20px #ff9800, 0 0 40px #ff5722;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 5;
+}
+
+.flame.burning {
+    opacity: 1;
+    animation: flicker 0.3s infinite alternate;
+}
+
+@keyframes flicker {
+    0% { transform: translateX(-50%) scale(1); }
+    100% { transform: translateX(-50%) scale(1.05) translateX(2px); }
+}
+
+.smoke {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    opacity: 0;
+    transition: opacity 1s;
+    z-index: 1;
+}
+
+.smoke.visible {
+    opacity: 1;
+}
+
+.smoke-particle {
+    position: absolute;
+    background: rgba(200, 200, 200, 0.7);
+    border-radius: 50%;
+    filter: blur(5px);
+}
+
+.post-container {
+    position: absolute;
+    top: -20px;
+    left: 70%;
+    transform: translateX(-50%);
+    width: 250px;
+    background: rgba(30, 30, 46, 0.9);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: 20;
+    cursor: pointer;
+}
+
+.post-container.visible {
+    opacity: 1;
+}
+
+.post-image {
+    width: 100%;
+    height: 150px;
+    background: #333;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.post-title {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #e94560;
+}
+
+.post-excerpt {
+    font-size: 14px;
+    color: #ccc;
+}
+
+.tools {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 40px;
+}
+
+.torch, .water-bucket {
+    width: 80px;
+    height: 80px;
+    cursor: grab;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.torch:active, .water-bucket:active {
+    cursor: grabbing;
+}
+
+.torch:hover, .water-bucket:hover {
+    transform: scale(1.1);
+}
+
+.torch-body {
+    width: 15px;
+    height: 50px;
+    background: linear-gradient(to right, #8B4513, #A0522D, #8B4513);
+    border-radius: 5px;
+    position: relative;
+}
+
+.torch-flame {
+    width: 25px;
+    height: 40px;
+    background: linear-gradient(to top, #ff9800, #ff5722, #ff9800);
+    border-radius: 50% 50% 20% 20%;
+    box-shadow: 0 0 15px #ff9800;
+    margin-bottom: 5px;
+}
+
+.bucket {
+    width: 70px;
+    height: 50px;
+    background: linear-gradient(to bottom, #4682B4, #5F9EA0);
+    border-radius: 5px 5px 15px 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.bucket::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px 3px 10px 10px;
+}
+
+.water {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: rgba(64, 164, 223, 0.7);
+    border-radius: 0 0 10px 10px;
+}
+
+.tool-label {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.instructions {
+    margin-top: 30px;
+    color: #8f8f8f;
+    font-size: 14px;
+    max-width: 600px;
+    line-height: 1.5;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    background: #1a1a2e;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #e94560;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal-title {
+    color: #e94560;
+    margin-bottom: 15px;
+}
+
+.modal-image {
+    width: 100%;
+    height: 200px;
+    background: #333;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.modal-body {
+    line-height: 1.6;
+    color: #ccc;
+}
+
+.counter {
+    margin-top: 20px;
+    color: #8f8f8f;
+    font-size: 14px;
+}

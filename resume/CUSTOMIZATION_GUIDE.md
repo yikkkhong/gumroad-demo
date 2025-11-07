@@ -499,4 +499,4 @@ After customizing:
 
 ---
 
-Need more help? Check the main README.md or create an issue on GitHub.
+Need more help? Check the main README.md

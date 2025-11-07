@@ -52,8 +52,8 @@ This template is available for purchase and commercial use under the following t
 
 ### Contact:
 For licensing questions or custom licensing needs, contact:
-[your-email@example.com]
+[yikhongyh1@gmail.com]
 
 ---
 
-© 2024 [Your Name/Company]. All rights reserved.
+© 2025 [yikhong]. All rights reserved.

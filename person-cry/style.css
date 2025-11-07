@@ -1,0 +1,548 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 20px;
+}
+
+/* Particles background */
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: float 15s infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Main content */
+.main-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Crying person */
+.person-container {
+    position: relative;
+    animation: personBob 3s ease-in-out infinite;
+}
+
+@keyframes personBob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.person {
+    position: relative;
+    width: 120px;
+    height: 180px;
+}
+
+.head {
+    width: 80px;
+    height: 80px;
+    background: #ffd1a3;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.face {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.eye {
+    position: absolute;
+    width: 12px;
+    height: 16px;
+    background: #333;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    top: 30px;
+    animation: blink 4s infinite;
+}
+
+@keyframes blink {
+    0%, 48%, 52%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(0.1); }
+}
+
+.left-eye {
+    left: 20px;
+}
+
+.right-eye {
+    right: 20px;
+}
+
+.tear {
+    position: absolute;
+    width: 6px;
+    height: 12px;
+    background: linear-gradient(180deg, #4dd0e1 0%, #0097a7 100%);
+    border-radius: 50% 0 50% 50%;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: tearDrop 2s infinite;
+    opacity: 0;
+}
+
+.tear-1 {
+    animation-delay: 0s;
+}
+
+.tear-2 {
+    animation-delay: 1s;
+}
+
+.tear-3 {
+    animation-delay: 0.5s;
+}
+
+.tear-4 {
+    animation-delay: 1.5s;
+}
+
+@keyframes tearDrop {
+    0% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-50%) translateY(60px);
+        opacity: 0;
+    }
+}
+
+.mouth {
+    position: absolute;
+    width: 30px;
+    height: 20px;
+    border: 3px solid #333;
+    border-top: none;
+    border-radius: 0 0 50% 50%;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.body {
+    width: 60px;
+    height: 70px;
+    background: #ff6b9d;
+    border-radius: 30px 30px 10px 10px;
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.arm {
+    width: 20px;
+    height: 60px;
+    background: #ffd1a3;
+    border-radius: 10px;
+    position: absolute;
+    top: 80px;
+}
+
+.left-arm {
+    left: 10px;
+    transform: rotate(-20deg);
+    transform-origin: top;
+    animation: armMove 2s ease-in-out infinite;
+}
+
+.right-arm {
+    right: 10px;
+    transform: rotate(20deg);
+    transform-origin: top;
+    animation: armMove 2s ease-in-out infinite reverse;
+}
+
+@keyframes armMove {
+    0%, 100% { transform: rotate(-20deg); }
+    50% { transform: rotate(-30deg); }
+}
+
+/* Tissue box */
+.tissue-box-container {
+    position: relative;
+    perspective: 1000px;
+}
+
+.tissue-box {
+    position: relative;
+    width: 280px;
+    height: 140px;
+    transform-style: preserve-3d;
+    animation: boxFloat 4s ease-in-out infinite;
+}
+
+@keyframes boxFloat {
+    0%, 100% { transform: translateY(0) rotateX(5deg); }
+    50% { transform: translateY(-5px) rotateX(5deg); }
+}
+
+.box-top {
+    position: absolute;
+    width: 280px;
+    height: 200px;
+    background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%);
+    border-radius: 20px 20px 0 0;
+    top: -60px;
+    box-shadow: 
+        0 -5px 20px rgba(0, 0, 0, 0.2),
+        inset 0 -10px 30px rgba(0, 0, 0, 0.1);
+    border: 3px solid #ff5a8a;
+}
+
+.box-top::before {
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 80px;
+    background: linear-gradient(135deg, #c44569 0%, #d65a7f 100%);
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.box-front {
+    position: absolute;
+    width: 280px;
+    height: 140px;
+    background: linear-gradient(180deg, #ff6b9d 0%, #ff8fab 100%);
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 3px solid #ff5a8a;
+    border-top: none;
+}
+
+.box-side {
+    position: absolute;
+    width: 200px;
+    height: 140px;
+    background: linear-gradient(90deg, #ff5a8a 0%, #ff6b9d 100%);
+    border-radius: 0 0 15px 15px;
+    transform-origin: left;
+    border: 3px solid #ff5a8a;
+}
+
+/* .box-side.left {
+    left: -100px;
+    transform: rotateY(90deg);
+}
+
+.box-side.right {
+    right: -100px;
+    transform: rotateY(-90deg);
+} */
+
+.box-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 10;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.box-title {
+    display: block;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.box-subtitle {
+    display: block;
+    font-size: 14px;
+    opacity: 0.9;
+    font-style: italic;
+}
+
+/* Tissues */
+.tissues-container {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 100px;
+}
+
+.tissue {
+    position: absolute;
+    width: 100px;
+    height: 140px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    cursor: grab;
+    transition: all 0.3s ease;
+    transform-origin: bottom center;
+    border: 2px solid #f0f0f0;
+}
+
+.tissue:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.tissue:active {
+    cursor: grabbing;
+}
+
+.tissue.grabbed {
+    z-index: 1000;
+    transition: none;
+}
+
+.tissue.pulled {
+    animation: tissuePull 0.8s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes tissuePull {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-200px) rotate(15deg) scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-400px) rotate(45deg) scale(0.5);
+        opacity: 0;
+    }
+}
+
+.tissue-content {
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 8px;
+}
+
+.tissue-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+    animation: iconBounce 2s ease-in-out infinite;
+}
+
+@keyframes iconBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.tissue-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.tissue-description {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* Instructions */
+.instructions {
+    text-align: center;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+.instruction-text {
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px 30px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+}
+
+/* Counter */
+.counter {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px 25px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #667eea;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+/* Reset button */
+.reset-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.reset-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.reset-btn:active {
+    transform: translateY(-1px);
+}
+
+.reset-btn svg {
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.reset-btn:not(:hover) svg {
+    animation: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .person {
+        transform: scale(0.8);
+    }
+    
+    .tissue-box {
+        transform: scale(0.9);
+    }
+    
+    .counter {
+        top: 15px;
+        right: 15px;
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+    
+    .reset-btn {
+        bottom: 15px;
+        right: 15px;
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+    
+    .instruction-text {
+        font-size: 14px;
+        padding: 12px 24px;
+    }
+}
+
+/* Celebration effect */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #ff6b9d;
+    position: absolute;
+    animation: confettiFall 3s ease-out forwards;
+    z-index: 1000;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
