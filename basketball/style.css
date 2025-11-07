@@ -1,0 +1,332 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.game-section {
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.basketball-court {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background: #3a7d34;
+    border: 5px solid #8b4513;
+    border-radius: 10px;
+    margin: 0 auto 30px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    /* Add containment for the ball */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add court boundaries */
+.basketball-court::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    pointer-events: none;
+    z-index: 1;
+    border-radius: 6px;
+}
+
+.hoop {
+    position: absolute;
+    top: 100px;
+    right: 250px;
+    width: 100px;
+    height: 100px;
+}
+
+.rim {
+    width: 100px;
+    height: 10px;
+    background: #ff8c00;
+    border-radius: 5px;
+    position: absolute;
+    top: 0;
+    box-shadow: 0 0 10px rgba(255, 140, 0, 0.7);
+}
+
+.net {
+    width: 80px;
+    height: 70px;
+    border-left: 2px dashed rgba(255, 255, 255, 0.7);
+    border-right: 2px dashed rgba(255, 255, 255, 0.7);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.basketball {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #ff8c00;
+    border-radius: 50%;
+    bottom: 50px;
+    left: 200px;
+    cursor: grab;
+    background: radial-gradient(circle at 30% 30%, #ff8c00, #e67300);
+    box-shadow: inset -5px -5px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s;
+}
+
+.basketball:active {
+    cursor: grabbing;
+}
+
+.basketball.dragging {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 140, 0, 0.8);
+    transition: transform 0.1s ease-out;
+}
+
+/* Drag indicator */
+.drag-indicator {
+    position: absolute;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.7);
+    transform-origin: bottom center;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Arrow head */
+.arrow-head {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid rgba(255, 255, 255, 0.7);
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -10px;
+}
+
+/* Power meter */
+.power-meter {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    overflow: hidden;
+    display: none;
+}
+
+.power-meter-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ff8c00, #ffcc00);
+    transition: width 0.1s ease-out;
+}
+
+/* Drag effect */
+.drag-effect {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, rgba(255, 140, 0, 0.2) 0%, rgba(255, 140, 0, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+.controls {
+    margin-top: 20px;
+}
+
+button {
+    background: #ff8c00;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #e67300;
+}
+
+.portfolio-section {
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    margin-top: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.portfolio-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.about, .skills, .projects {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.projects {
+    grid-column: 1 / -1;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.project {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.project img {
+    width: 100%;
+    height: 200px; /* Fixed height for all images */
+    object-fit: cover;
+    object-position: center;
+    border-bottom: 1px solid #eee;
+}
+
+.project-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.project h3 {
+    margin: 0 0 10px;
+    font-size: 1.3em;
+    color: #333;
+}
+
+.project p {
+    margin: 0 0 15px;
+    color: #666;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+.project-link {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: #ff8c00;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+    margin-top: auto;
+}
+
+.project-link:hover {
+    background-color: #e67300;
+}
+
+.project:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.hidden {
+    display: none;
+}
+
+.celebration {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #f00;
+    opacity: 0;
+}
+
+@keyframes shoot {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.shooting {
+    animation: shoot 0.3s ease-in-out;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .portfolio-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .basketball-court {
+        height: 400px;
+    }
+    
+    .hoop {
+        right: 150px;
+    }
+}
