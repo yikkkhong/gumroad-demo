@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Law Firm Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-balance-scale"></i>
+                <h1>LAWFIRM</h1>
+            </div>
+            <div class="sidebar-menu">
+                <a href="#" class="menu-item active" data-section="dashboard">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="menu-item" data-section="clients">
+                    <i class="fas fa-users"></i>
+                    <span>Clients</span>
+                </a>
+                <a href="#" class="menu-item" data-section="cases">
+                    <i class="fas fa-folder-open"></i>
+                    <span>Cases</span>
+                </a>
+                <a href="#" class="menu-item" data-section="calendar-section">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Calendar</span>
+                </a>
+                <a href="#" class="menu-item" data-section="billing">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <span>Billing</span>
+                </a>
+                <a href="#" class="menu-item" data-section="reports">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reports</span>
+                </a>
+                <a href="#" class="menu-item" data-section="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <div class="content-section active" id="dashboard">
+                <div class="content-header">
+                    <h2>Dashboard</h2>
+                    <div class="user-info">
+                        <div class="user-avatar">JD</div>
+                        <div>
+                            <div style="font-weight: 600;">John Davidson</div>
+                            <div style="font-size: 14px; color: var(--gray);">Senior Partner</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card" data-section="clients">
+                        <div class="stat-icon clients">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="clients-count">142</h3>
+                            <p>Active Clients</p>
+                        </div>
+                    </div>
+                    <div class="stat-card" data-section="cases">
+                        <div class="stat-icon cases">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="cases-count">68</h3>
+                            <p>Open Cases</p>
+                        </div>
+                    </div>
+                    <div class="stat-card" data-section="billing">
+                        <div class="stat-icon revenue">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="revenue-amount">$284,750</h3>
+                            <p>YTD Revenue</p>
+                        </div>
+                    </div>
+                    <div class="stat-card" data-section="calendar">
+                        <div class="stat-icon tasks">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="tasks-count">24</h3>
+                            <p>Pending Tasks</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Cases -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <h3>Recent Cases</h3>
+                        <button class="btn btn-primary" id="newCaseBtn">
+                            <i class="fas fa-plus"></i> New Case
+                        </button>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="recent-cases-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Case ID</th>
+                                            <th>Case Name</th>
+                                            <th>Client</th>
+                                            <th>Type</th>
+                                            <th>Status</th>
+                                            <th>Last Updated</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Cases will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calendar & Upcoming Events -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <h3 id="calendar-month">October 2023</h3>
+                        <button class="btn btn-secondary" id="addEventBtn">
+                            <i class="fas fa-calendar-plus"></i> Add Event
+                        </button>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="calendar" id="calendar">
+                                <!-- Calendar will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Billing Summary -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <h3>Billing Summary</h3>
+                        <button class="btn btn-primary" id="generateReportBtn">
+                            <i class="fas fa-file-invoice"></i> Generate Report
+                        </button>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="tabs">
+                                <div class="tab active" data-tab="invoices">Invoices</div>
+                                <div class="tab" data-tab="payments">Payments</div>
+                                <div class="tab" data-tab="expenses">Expenses</div>
+                            </div>
+                            
+                            <div class="tab-content active" id="invoices">
+                                <div class="table-responsive">
+                                    <table id="invoices-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Invoice #</th>
+                                                <th>Client</th>
+                                                <th>Date</th>
+                                                <th>Amount</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Invoices will be populated by JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clients Section -->
+            <div class="content-section" id="clients">
+                <div class="content-header">
+                    <h2>Client Management</h2>
+                    <button class="btn btn-primary" id="addClientBtn">
+                        <i class="fas fa-plus"></i> Add Client
+                    </button>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="clients-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Cases</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Clients will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cases Section -->
+            <div class="content-section" id="cases">
+                <div class="content-header">
+                    <h2>Case Management</h2>
+                    <button class="btn btn-primary" id="addCaseBtn">
+                        <i class="fas fa-plus"></i> Add Case
+                    </button>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="cases-table">
+                                <thead>
+                                    <tr>
+                                        <th>Case ID</th>
+                                        <th>Case Name</th>
+                                        <th>Client</th>
+                                        <th>Type</th>
+                                        <th>Status</th>
+                                        <th>Open Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Cases will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar Section -->
+            <div class="content-section" id="calendar-section">
+                <div class="content-header">
+                    <h2>Calendar</h2>
+                    <div>
+                        <button class="btn btn-secondary" id="prevMonthBtn">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </button>
+                        <button class="btn btn-secondary" id="nextMonthBtn">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <button class="btn btn-primary" id="addCalendarEventBtn">
+                            <i class="fas fa-plus"></i> Add Event
+                        </button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h3 id="full-calendar-month" style="margin-bottom: 20px; text-align: center;"></h3>
+                        <div class="calendar-full" id="calendar-full">
+                            <!-- Full calendar will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Billing Section -->
+            <div class="content-section" id="billing">
+                <div class="content-header">
+                    <h2>Billing & Invoices</h2>
+                    <button class="btn btn-primary" id="createInvoiceBtn">
+                        <i class="fas fa-plus"></i> Create Invoice
+                    </button>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tabs">
+                            <div class="tab active" data-tab="billing-invoices">Invoices</div>
+                            <div class="tab" data-tab="billing-payments">Payments</div>
+                            <div class="tab" data-tab="billing-expenses">Expenses</div>
+                        </div>
+                        
+                        <div class="tab-content active" id="billing-invoices">
+                            <div class="table-responsive">
+                                <table id="billing-invoices-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Invoice #</th>
+                                            <th>Client</th>
+                                            <th>Date</th>
+                                            <th>Due Date</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Invoices will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div class="content-section" id="reports">
+                <div class="content-header">
+                    <h2>Reports & Analytics</h2>
+                    <button class="btn btn-primary" id="generateFullReportBtn">
+                        <i class="fas fa-download"></i> Export Report
+                    </button>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon revenue">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>$284,750</h3>
+                            <p>Total Revenue</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon cases">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>68</h3>
+                            <p>Active Cases</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon clients">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>142</h3>
+                            <p>Total Clients</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon tasks">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>92%</h3>
+                            <p>Collection Rate</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Revenue Trends</h4>
+                        <div class="chart-placeholder">
+                            <p>Revenue chart would be displayed here with monthly breakdown</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div class="content-section" id="settings">
+                <div class="content-header">
+                    <h2>Settings</h2>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="settings-grid">
+                            <div class="setting-group">
+                                <h4>Firm Information</h4>
+                                <div class="form-group">
+                                    <label>Firm Name</label>
+                                    <input type="text" id="firm-name" value="Davidson & Associates Law Firm">
+                                </div>
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <textarea id="firm-address">123 Legal Street, Suite 400\nNew York, NY 10001</textarea>
+                                </div>
+                            </div>
+                            <div class="setting-group">
+                                <h4>Billing Settings</h4>
+                                <div class="form-group">
+                                    <label>Default Hourly Rate ($)</label>
+                                    <input type="number" id="hourly-rate" value="350">
+                                </div>
+                                <div class="form-group">
+                                    <label>Payment Terms (days)</label>
+                                    <input type="number" id="payment-terms" value="30">
+                                </div>
+                            </div>
+                            <div class="setting-group">
+                                <h4>Notifications</h4>
+                                <div class="form-group checkbox-group">
+                                    <input type="checkbox" id="email-notifications" checked>
+                                    <label for="email-notifications">Email Notifications</label>
+                                </div>
+                                <div class="form-group checkbox-group">
+                                    <input type="checkbox" id="case-updates" checked>
+                                    <label for="case-updates">Case Update Alerts</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings-actions">
+                            <button class="btn btn-primary" id="saveSettingsBtn">Save Settings</button>
+                            <button class="btn btn-secondary">Reset to Default</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modals -->
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3 id="modal-title">Add New Item</h3>
+                    <form id="modal-form">
+                        <div class="form-group">
+                            <label for="item-name">Name:</label>
+                            <input type="text" id="item-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="item-description">Description:</label>
+                            <textarea id="item-description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="item-type">Type:</label>
+                            <select id="item-type">
+                                <option value="general">General</option>
+                                <option value="meeting">Meeting</option>
+                                <option value="hearing">Court Hearing</option>
+                                <option value="deadline">Deadline</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Event Modal -->
+            <div id="event-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3 id="event-modal-title">Add New Event</h3>
+                    <form id="event-form">
+                        <div class="form-group">
+                            <label for="event-title">Event Title:</label>
+                            <input type="text" id="event-title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-date">Date:</label>
+                            <input type="date" id="event-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-time">Time:</label>
+                            <input type="time" id="event-time" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-type">Event Type:</label>
+                            <select id="event-type">
+                                <option value="meeting">Client Meeting</option>
+                                <option value="hearing">Court Hearing</option>
+                                <option value="deadline">Filing Deadline</option>
+                                <option value="appointment">Appointment</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-notes">Notes:</label>
+                            <textarea id="event-notes"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Event</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

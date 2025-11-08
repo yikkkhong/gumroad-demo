@@ -137,7 +137,6 @@ Add social media links to your profile:
 1. **Prepare Your Images**
    - Recommended size: At least 600x400px for optimal quality
    - Supported formats: JPG, PNG, or WebP
-   - Optimize images for web (use tools like [TinyPNG](https://tinypng.com/))
 
 2. **Add Images to Your Project**
    - Place your images in the `images` folder
