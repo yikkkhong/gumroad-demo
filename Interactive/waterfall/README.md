@@ -15,6 +15,11 @@ A physics-based interactive portfolio template featuring a fluid particle simula
 ❌ Claim the template as your own creation
 ❌ Use without purchasing a license
 
+## Features
+ - **Physics-Based Particle System**: A custom canvas engine renders thousands of particles that simulate gravity, fluid dynamics, and collision.
+- **Real-Time Interaction**: Particles react to mouse movements and touch inputs, creating splashes and ripples as users interact with the page.
+- **Dynamic Obstacles**: HTML content blocks (.obs-collider) act as physical objects in the simulation. Water flows around them and bounces off their surfaces.
+
 ## Project Structure
 
 - **index.html** – Main structure, text, navigation, layout  
