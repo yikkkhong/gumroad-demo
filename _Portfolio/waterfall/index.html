@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waterfall Portfolio - The Flow</title>
+    <!-- Tailwind CSS (CDN for simplicity) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS File -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Canvas for the Physics Simulation -->
+    <canvas id="waterfall-canvas"></canvas>
+
+    <!-- Custom Cursor Elements -->
+    <div id="cursor-follower"></div>
+    <div id="cursor-glow"></div>
+
+    <!-- Fixed Navigation (Right side) -->
+    <nav class="fixed right-6 top-1/2 transform -translate-y-1/2 z-50 hidden md:flex flex-col gap-4">
+        <a href="#home" class="nav-dot w-3 h-3 rounded-full bg-slate-600 hover:bg-white" aria-label="Home"></a>
+        <a href="#about" class="nav-dot w-3 h-3 rounded-full bg-slate-600 hover:bg-white" aria-label="About"></a>
+        <a href="#projects" class="nav-dot w-3 h-3 rounded-full bg-slate-600 hover:bg-white" aria-label="Projects"></a>
+        <a href="#contact" class="nav-dot w-3 h-3 rounded-full bg-slate-600 hover:bg-white" aria-label="Contact"></a>
+    </nav>
+
+    <!-- Main Content -->
+    <div id="ui-layer" class="w-full">
+        
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center justify-center p-6 relative">
+            <div class="content-block text-center max-w-4xl mx-auto glass-panel p-10 rounded-2xl obs-collider" data-force="0.8">
+                <p class="text-cyan-400 tracking-widest uppercase text-sm mb-4 font-bold">Interactive Portfolio</p>
+                <h1 class="text-5xl md:text-8xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 to-blue-500">
+                    Alex Rivers
+                </h1>
+                <p class="text-xl md:text-2xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+                    Creative Developer & UI Engineer.
+                    <br>
+                    <span class="text-sm opacity-70">Move your mouse to disturb the flow. Scroll to dive deeper.</span>
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#projects" class="px-8 py-3 bg-cyan-500 text-slate-900 font-bold rounded-full hover:bg-cyan-400 transition-colors shadow-[0_0_20px_rgba(34,211,238,0.5)]">
+                        View Work
+                    </a>
+                    <button onclick="triggerSplash()" class="px-8 py-3 border border-cyan-500 text-cyan-400 rounded-full hover:bg-cyan-900/30 transition-colors">
+                        Make a Splash
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="min-h-screen flex items-center justify-center p-6 relative">
+            <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- Image/Graphic placeholder acting as a collider -->
+                <div class="content-block glass-panel p-1 rounded-2xl h-80 md:h-96 w-full flex items-center justify-center bg-slate-900 obs-collider" data-force="1.2">
+                   <div class="text-center">
+                       <i class="fas fa-water text-6xl text-cyan-500 mb-4 animate-bounce"></i>
+                       <p class="text-slate-400">Fluency in Code</p>
+                   </div>
+                </div>
+                
+                <div class="content-block obs-collider bg-slate-900/80 p-8 rounded-xl border-l-4 border-cyan-500" data-force="0.5">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Like Water</h2>
+                    <p class="text-lg text-slate-300 mb-6 leading-relaxed">
+                        I believe web experiences should be fluid. My code adapts to the device, the user, and the context.
+                        Specializing in <strong>JavaScript, React, and WebGL</strong>, I build applications that feel alive.
+                    </p>
+                    <ul class="grid grid-cols-2 gap-4 text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyan-400"></i> Frontend Architecture</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyan-400"></i> Creative Coding</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyan-400"></i> UI/UX Design</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyan-400"></i> Performance Tuning</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="min-h-screen py-20 px-6">
+            <div class="container mx-auto">
+                <h2 class="text-4xl md:text-6xl font-bold mb-16 text-center content-block obs-collider">Selected Works</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Project 1 -->
+                    <div class="content-block group relative obs-collider rounded-2xl overflow-hidden" data-force="0.9">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent z-10"></div>
+                        <div class="h-80 bg-slate-800 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                            <i class="fas fa-mountain text-6xl text-slate-600 group-hover:text-cyan-400 transition-colors"></i>
+                        </div>
+                        <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
+                            <h3 class="text-2xl font-bold mb-2 text-white">Alpine Explorer</h3>
+                            <p class="text-slate-400 text-sm mb-4">React, Three.js, Mapbox</p>
+                            <div class="flex gap-2">
+                                <span class="text-xs border border-slate-600 px-2 py-1 rounded">WebGL</span>
+                                <span class="text-xs border border-slate-600 px-2 py-1 rounded">Interactive</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="content-block group relative obs-collider rounded-2xl overflow-hidden" data-force="0.9">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent z-10"></div>
+                        <div class="h-80 bg-slate-800 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                            <i class="fas fa-bolt text-6xl text-slate-600 group-hover:text-yellow-400 transition-colors"></i>
+                        </div>
+                        <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
+                            <h3 class="text-2xl font-bold mb-2 text-white">Volt Dashboard</h3>
+                            <p class="text-slate-400 text-sm mb-4">Vue.js, D3.js, Firebase</p>
+                            <div class="flex gap-2">
+                                <span class="text-xs border border-slate-600 px-2 py-1 rounded">Data Viz</span>
+                                <span class="text-xs border border-slate-600 px-2 py-1 rounded">SaaS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="content-block group relative obs-collider rounded-2xl overflow-hidden" data-force="0.9">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent z-10"></div>
+                        <div class="h-80 bg-slate-800 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                            <i class="fas fa-gamepad text-6xl text-slate-600 group-hover:text-purple-400 transition-colors"></i>
+                        </div>
+                        <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
+                            <h3 class="text-2xl font-bold mb-2 text-white">Neon Drift</h3>
+                            <p class="text-slate-400 text-sm mb-4">HTML5 Canvas, Socket.io</p>
+                            <div class="flex gap-2">
+                                <span class="text-xs border border-slate-600 px-2 py-1 rounded">Game Dev</span>
+                                <span class="text-xs border border-slate-600 px-2 py-1 rounded">Multiplayer</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="min-h-screen flex items-center justify-center p-6 relative">
+            <div class="content-block max-w-2xl w-full text-center glass-panel p-10 rounded-3xl obs-collider" data-force="1.5">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Join the Stream</h2>
+                <p class="text-slate-300 mb-8 text-lg">
+                    Have a project in mind? Let's build something that flows naturally.
+                </p>
+                
+                <form onsubmit="event.preventDefault(); alert('Message sent to the virtual stream!');" class="space-y-4 text-left">
+                    <div>
+                        <label class="block text-sm text-cyan-400 mb-1">Name</label>
+                        <input type="text" class="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-3 focus:outline-none focus:border-cyan-500 transition-colors" placeholder="Your name">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-cyan-400 mb-1">Email</label>
+                        <input type="email" class="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-3 focus:outline-none focus:border-cyan-500 transition-colors" placeholder="hello@example.com">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-cyan-400 mb-1">Message</label>
+                        <textarea rows="4" class="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-3 focus:outline-none focus:border-cyan-500 transition-colors" placeholder="Tell me about your idea..."></textarea>
+                    </div>
+                    <button class="w-full bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold py-3 rounded-lg hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all transform hover:-translate-y-1">
+                        Send Message
+                    </button>
+                </form>
+
+                <div class="mt-8 flex justify-center gap-6 text-2xl text-slate-400">
+                    <a href="#" class="hover:text-cyan-400 transition-colors"><i class="fab fa-github"></i></a>
+                    <a href="#" class="hover:text-cyan-400 transition-colors"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="hover:text-cyan-400 transition-colors"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="hover:text-cyan-400 transition-colors"><i class="fab fa-dribbble"></i></a>
+                </div>
+            </div>
+        </section>
+        
+        <footer class="py-6 text-center text-slate-600 text-sm">
+            <p>&copy; 2025 Alex Rivers. Built with Fluid Physics.</p>
+        </footer>
+    </div>
+
+    <!-- Custom JavaScript File -->
+    <script src="script.js"></script>
+</body>
+</html>
