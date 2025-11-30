@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotlight | Interactive Portfolio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['DM Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        wall: '#e2e8f0',
+                        offBlack: '#050505',
+                    },
+                    boxShadow: {
+                        'switch-plate': '2px 2px 5px rgba(0,0,0,0.05), -2px -2px 5px rgba(255,255,255,1), inset 0 0 2px rgba(0,0,0,0.1)',
+                        'switch-on': 'inset 0 2px 5px rgba(0,0,0,0.1), 0 1px 0 rgba(255,255,255,1)',
+                        'switch-off': 'inset 0 -2px 5px rgba(0,0,0,0.1), 0 -1px 0 rgba(255,255,255,1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="h-screen w-screen overflow-hidden flex bg-offBlack text-slate-800">
+
+    <section class="w-1/3 h-full relative z-50 flex flex-col items-center justify-center border-r border-stone-800 transition-colors duration-500" id="left-wall">
+        
+        <div class="absolute inset-0 bg-[#e0e0e0] opacity-100 transition-opacity duration-500 wall-texture" id="wall-bg"></div>
+        
+        <div class="absolute inset-0 bg-black opacity-0 transition-opacity duration-500 pointer-events-none" id="wall-shadow"></div>
+
+        <div class="relative z-10 group">
+            <div class="switch-plate">
+                <div class="screw top"></div>
+                <div class="switch-housing">
+                    <div id="main-switch" class="rocker on"></div>
+                </div>
+                <div class="screw bottom"></div>
+            </div>
+            
+            <div class="absolute -bottom-12 w-full text-center font-sans text-xs font-bold tracking-widest text-stone-400 uppercase opacity-50">
+                Studio Light
+            </div>
+        </div>
+    </section>
+
+    <section class="w-2/3 h-full relative bg-[#e0e0e0] flex items-center justify-center overflow-hidden">
+
+        <div id="darkness-overlay" class="absolute inset-0 bg-black z-40 opacity-0"></div>
+
+        <div id="content-container" class="relative z-10 w-full max-w-2xl px-8 opacity-100">
+            
+            <div class="absolute -top-[100vh] left-1/2 -translate-x-1/2 w-[150%] h-[150vh] spotlight-cone opacity-50 pointer-events-none"></div>
+
+            <article id="project-card" class="bg-white rounded shadow-2xl overflow-hidden transform transition-all duration-500">
+                </article>
+
+            <div class="mt-8 text-center animate-pulse">
+                <p class="text-stone-500 text-xs tracking-widest uppercase">Toggle light to view next project</p>
+            </div>
+        </div>
+
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

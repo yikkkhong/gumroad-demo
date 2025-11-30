@@ -1,0 +1,122 @@
+/* --- Realistic Switch CSS --- */
+.wall-texture {
+    background-color: #e5e5f7;
+    opacity: 0.8;
+    background-image: radial-gradient(#444cf7 0.5px, #e5e5f7 0.5px);
+    background-size: 10px 10px;
+}
+
+/* The Plate */
+.switch-plate {
+    width: 140px;
+    height: 220px;
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    border-radius: 12px;
+    box-shadow: 
+        5px 5px 15px rgba(0,0,0,0.15),
+        -1px -1px 2px rgba(255,255,255,0.8);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* The Screw Heads */
+.screw {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ccc, #f9f9f9);
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.screw::after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: #999;
+    transform: rotate(45deg);
+}
+.screw.top { top: 20px; }
+.screw.bottom { bottom: 20px; }
+
+/* The Rocker Housing */
+.switch-housing {
+    width: 60px;
+    height: 100px;
+    background: #f1f1f1;
+    border-radius: 4px;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.1);
+    padding: 4px;
+}
+
+/* The Rocker Itself */
+.rocker {
+    width: 100%;
+    height: 100%;
+    background: #fcfcfc;
+    border: 1px solid #eee;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* State: ON */
+.rocker.on {
+    background: linear-gradient(to bottom, #fff 40%, #f0f0f0 100%);
+    box-shadow: 
+        0 4px 6px rgba(0,0,0,0.1),
+        inset 0 2px 0 rgba(255,255,255,1);
+    transform: perspective(500px) rotateX(15deg);
+    border-bottom: 1px solid #ccc;
+}
+
+/* State: OFF */
+.rocker.off {
+    background: linear-gradient(to top, #fff 40%, #f0f0f0 100%);
+    box-shadow: 
+        0 -2px 6px rgba(0,0,0,0.05),
+        inset 0 -2px 0 rgba(255,255,255,1);
+    transform: perspective(500px) rotateX(-15deg);
+    border-top: 1px solid #ccc;
+}
+
+/* --- Lighting Effects --- */
+#content-area {
+    transition: opacity 0.1s ease-in-out; /* Fast off */
+}
+
+/* The Flicker Effect when turning on */
+.flicker-on {
+    animation: flicker 0.6s linear forwards;
+}
+
+@keyframes flicker {
+    0% { opacity: 0; }
+    10% { opacity: 0; }
+    15% { opacity: 1; }
+    30% { opacity: 0.2; }
+    40% { opacity: 0.8; }
+    50% { opacity: 0.4; }
+    70% { opacity: 1; }
+    80% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Darkness Overlay */
+#darkness-overlay {
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+/* Spotlight Cone logic */
+.spotlight-cone {
+    background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0) 70%);
+    pointer-events: none;
+}

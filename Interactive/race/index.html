@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Portfolio Run</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main id="game-container">
+        <div class="bg-layer sky-gradient"></div>
+        <div class="bg-layer clouds-back"></div>
+        <div class="bg-layer mountains"></div>
+        <div class="bg-layer clouds-front"></div>
+        <div class="bg-layer ground-track"></div>
+
+        <div id="track-area">
+            <div id="finish-line">
+                <div class="checkers"></div>
+                <span>FINISH!</span>
+            </div>
+
+            <div class="player-wrapper" id="p1-wrapper" style="top: 20%;">
+                <div class="dust-trail"></div>
+                <div class="character char-blue">
+                    <div class="goggles"><div class="lens"></div></div>
+                </div>
+                <div class="player-tag">DevRunner</div>
+            </div>
+
+            <div class="player-wrapper" id="p2-wrapper" style="top: 45%;">
+                <div class="dust-trail"></div>
+                <div class="character char-pink">
+                     <div class="big-eye"></div>
+                     <div class="smile"></div>
+                </div>
+                <div class="player-tag">DesiGnarl</div>
+            </div>
+
+            <div class="player-wrapper" id="p3-wrapper" style="top: 70%;">
+                 <div class="dust-trail"></div>
+                <div class="character char-orange">
+                    <div class="fox-ears"></div>
+                    <div class="fox-face">
+                        <div class="fox-nose"></div>
+                    </div>
+                </div>
+                <div class="player-tag">SysAdminOps</div>
+            </div>
+        </div>
+
+        <div id="ui-layer" class="glass-panel">
+            <h1>PORTFOLIO DASH!</h1>
+            <p>The race determines the project showcase order.</p>
+            <button id="start-btn" class="arcade-btn">START RACE <span class="arrow">▶</span></button>
+        </div>
+    </main>
+
+    <section id="character-intro">
+        <h2>MEET THE RUNNERS</h2>
+        <div class="intro-grid">
+            <div class="intro-card blue-border">
+                <div class="preview-box">
+                    <div class="character char-blue static-pose">
+                        <div class="goggles"><div class="lens"></div></div>
+                    </div>
+                </div>
+                <h3>DevRunner</h3>
+                <p>Backend & APIs</p>
+            </div>
+
+            <div class="intro-card pink-border">
+                 <div class="preview-box">
+                    <div class="character char-pink static-pose">
+                        <div class="big-eye"></div>
+                        <div class="smile"></div>
+                   </div>
+                 </div>
+                <h3>DesiGnarl</h3>
+                <p>UI/UX Design</p>
+            </div>
+
+            <div class="intro-card orange-border">
+                 <div class="preview-box">
+                    <div class="character char-orange static-pose">
+                        <div class="fox-ears"></div>
+                        <div class="fox-face"><div class="fox-nose"></div></div>
+                    </div>
+                 </div>
+                <h3>SysAdminOps</h3>
+                <p>DevOps & Cloud</p>
+            </div>
+        </div>
+    </section>
+    <section id="leaderboard" class="hidden">
+        <h2>🏁 Race Results & Top Projects 🏁</h2>
+        <div id="results-grid"></div>
+        <button onclick="location.reload()" class="arcade-btn small">Replay Race 🔄</button>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
