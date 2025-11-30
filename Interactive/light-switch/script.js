@@ -3,35 +3,36 @@ const portfolioItems = [
     {
         title: "The Noir Collection",
         type: "Fashion Editorial",
-        image: "",
+        // path to your local image
+        image: "images/project-1.jpg", 
         desc: "A monochromatic exploration of shadow and silhouette in modern street style.",
         year: "2024"
     },
     {
         title: "Ceramic Void",
         type: "Product Design",
-        image: "",
+        image: "images/project-2.jpg",
         desc: "Hand-crafted pottery emphasizing negative space and ergonomic utility.",
         year: "2023"
     },
     {
         title: "Neon Horizons",
         type: "Digital Art",
-        image: "",
+        image: "images/project-3.jpg",
         desc: "Cyberpunk landscapes rendered in real-time using Unreal Engine 5.",
         year: "2024"
     },
     {
-        title: "Botanical Synthetics",
-        type: "Installation",
-        image: "",
-        desc: "Merging organic plant matter with recycled plastic polymers.",
+        title: "Lakefront Goose",
+        type: "Photography",
+        image: "images/project-4.jpg",
+        desc: "A serene photograph of a goose standing by the lakeside, with soft natural light highlighting the delicate details of its feathers",
         year: "2022"
     },
     {
         title: "Type & Texture",
         type: "Brand Identity",
-        image: "",
+        image: "images/project-5.jpg",
         desc: "A bold typographic system for a Swiss architecture firm.",
         year: "2023"
     }
@@ -85,10 +86,10 @@ function toggleLight() {
         switchBtn.classList.add('off');
 
         // 2. Make Room Dark
-        darknessOverlay.style.opacity = '1'; // Full black on right
-        wallShadow.style.opacity = '0.8';   // Dim the wall on left
+        darknessOverlay.style.opacity = '1'; 
+        wallShadow.style.opacity = '0.8';
         
-        // 3. Hide Content (so it can be swapped unseen)
+        // 3. Hide Content
         contentContainer.style.opacity = '0';
         contentContainer.classList.remove('flicker-on');
 
@@ -109,7 +110,6 @@ function toggleLight() {
         wallShadow.style.opacity = '0';
 
         // 4. Reveal Content with Flicker
-        // Small timeout to ensure darkness is gone before flicker starts
         setTimeout(() => {
             contentContainer.style.opacity = '1';
             contentContainer.classList.remove('flicker-on');
