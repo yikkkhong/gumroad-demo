@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Traveler's Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="scene-container">
+        <div class="sky">
+            <div class="sun"></div>
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+        </div>
+        <div class="ground">
+            <div class="road"></div>
+        </div>
+
+        <div class="character-wrapper">
+            <div class="traveler" id="traveler">
+                <div class="head">
+                    <div class="cap"></div>
+                    <div class="face">
+                        <div class="eyes"></div>
+                        <div class="mouth"></div>
+                    </div>
+                </div>
+                <div class="body">
+                    <div class="backpack" id="backpack">
+                        <div class="flap"></div>
+                        <div class="pocket"></div>
+                    </div>
+                    <div class="arm left-arm"></div>
+                    <div class="torso">
+                        <div class="shirt-logo"></div>
+                    </div>
+                    <div class="arm right-arm" id="right-arm"></div>
+                </div>
+                <div class="legs">
+                    <div class="leg left-leg"></div>
+                    <div class="leg right-leg"></div>
+                </div>
+            </div>
+            
+            <div class="held-item" id="held-item"></div>
+        </div>
+
+        <div class="ui-layer">
+            <div class="item-card" id="item-card">
+                <div class="card-header">
+                    <h2 id="card-title">Project Title</h2>
+                    <button class="close-card" onclick="closeCard()">×</button>
+                </div>
+                <div class="card-body">
+                    <p id="card-desc">Description goes here.</p>
+                    <div class="card-stats" id="card-stats"></div>
+                </div>
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker-name">Traveler Dev</div>
+                <div class="text-area">
+                    <p id="dialogue-text"></p>
+                    <span class="typing-cursor">|</span>
+                </div>
+                
+                <div class="options-container" id="options-container">
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
