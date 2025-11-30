@@ -1,0 +1,303 @@
+/* --- General Reset & Theming --- */
+:root {
+    --primary-color: #ff9f43;
+    --secondary-color: #2ecc71;
+    --dirt-color: #8d6e63;
+    --dirt-shadow: #5d4037;
+    --mole-brown: #a0522d;
+    --bg-sky: #87CEEB;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    /* Cartoon Garden Background */
+    background: linear-gradient(to bottom, var(--bg-sky) 0%, #f0f8ff 60%, #2ecc71 60%);
+    height: 100vh;
+    overflow: hidden;
+    cursor: none; /* Hide default cursor */
+    user-select: none;
+}
+
+h1, h2, .scoreboard-container, #start-btn, .mole-label {
+    font-family: 'Titan One', cursive; /* Fun chunky font */
+}
+
+.main-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+}
+
+/* --- Header Elements --- */
+header {
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: white;
+    font-size: 3.5rem;
+    text-shadow: 3px 3px 0px #333, -3px -3px 0px #333, 3px -3px 0px #333, -3px 3px 0px #333;
+    margin: 0;
+}
+
+.subtitle {
+    color: #333;
+    font-weight: bold;
+    background: rgba(255,255,255,0.7);
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 15px;
+}
+
+.scoreboard-container {
+    background: #fff;
+    border: 4px solid #333;
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 15px;
+    font-size: 1.8rem;
+    margin: 15px 0;
+    box-shadow: 0 5px 0 #333;
+}
+
+#start-btn {
+    display: block;
+    margin: 10px auto;
+    padding: 15px 40px;
+    font-size: 1.5rem;
+    background: var(--primary-color);
+    border: 4px solid #333;
+    color: #333;
+    border-radius: 15px;
+    cursor: none; /* Even hovering button uses custom cursor */
+    box-shadow: 0 8px 0 #e67e22, 0 8px 0 4px #333;
+    transition: all 0.1s;
+}
+
+#start-btn:active {
+    transform: translateY(8px);
+    box-shadow: 0 0 0 #e67e22, 0 0 0 4px #333;
+}
+
+
+/* --- Custom Hammer Cursor --- */
+.cursor {
+    position: fixed;
+    top: 0; left: 0;
+    width: 60px; height: 60px;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease-out;
+    transform-origin: 80% 80%; /* Pivot point for swinging */
+    margin-top: -30px; /* Offset to center tip */
+    margin-left: -10px;
+}
+
+/* Simple CSS Hammer construction */
+.hammer-head {
+    width: 50px; height: 30px;
+    background: #555;
+    border: 3px solid #333;
+    border-radius: 5px;
+    position: absolute; top: 0; left: 0;
+    background-image: linear-gradient(to right, #777 20%, #555 20%, #555 80%, #777 80%);
+}
+.hammer-handle {
+    width: 15px; height: 50px;
+    background: #8d6e63;
+    border: 3px solid #333;
+    position: absolute; top: 25px; left: 17px;
+    border-radius: 0 0 5px 5px;
+}
+
+/* Hammer Bonk Animation */
+.cursor.bonk {
+    transform: rotate(-60deg) translate(-10px, 10px);
+}
+
+/* "POW" Hit Effect Graphic */
+.hit-pow {
+    position: absolute;
+    width: 80px; height: 80px;
+    background: #ffeb3b;
+    /* CSS Star shape */
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    z-index: 100;
+    pointer-events: none;
+    border: 3px solid #333;
+    animation: pow-fade 0.4s ease-out forwards;
+}
+
+@keyframes pow-fade {
+    0% { transform: scale(0.5) rotate(0deg); opacity: 1; }
+    100% { transform: scale(1.5) rotate(45deg); opacity: 0; }
+}
+
+
+/* --- Game Grid --- */
+.game-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.hole-container {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    /* Temporary outline for debugging hit areas if needed */
+    /* border: 1px solid red; */
+}
+
+/* The textured dirt pile in front */
+.dirt-pile {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    background: var(--dirt-color);
+    /* Creating a lumpy dirt texture with radial gradients */
+    background-image: 
+        radial-gradient(circle at 20% 50%, var(--dirt-shadow) 10%, transparent 20%),
+        radial-gradient(circle at 80% 60%, var(--dirt-shadow) 12%, transparent 22%),
+        radial-gradient(circle at 50% 30%, var(--dirt-shadow) 8%, transparent 18%);
+    border-radius: 40% 40% 10% 10%;
+    z-index: 10; /* Must be in front of the mole when it's down */
+    border-bottom: 5px solid var(--dirt-shadow);
+}
+
+/* The area the mole moves within behind the dirt */
+.hole {
+    position: absolute;
+    top: 30px; /* Offset so it doesn't go too high above dirt */
+    width: 100%;
+    height: 150px; /* Height the mole travels */
+    overflow: hidden;
+    z-index: 5;
+    /* Use a mask to cut off the bottom of the mole smoothly */
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 95%);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 95%);
+}
+
+
+/* --- The Mole Character --- */
+.mole {
+    width: 70%;
+    height: 140px; /* Tall enough to be clicked */
+    background: var(--mole-brown);
+    position: absolute;
+    bottom: -150px; /* Start completely hidden */
+    left: 15%;
+    border-radius: 45% 45% 10% 10%;
+    transition: bottom 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+    border: 4px solid #5a2d18;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 15px;
+}
+
+/* When the mole is active */
+.hole.up .mole {
+    bottom: 0px;
+}
+
+/* Mole Face Details */
+.mole-face {
+    width: 60%;
+    height: 40px;
+    position: relative;
+    margin-bottom: 10px;
+}
+.eyes {
+    position: absolute; top: 5px; left: 10%;
+    width: 12px; height: 16px; background: #333; border-radius: 50%;
+    box-shadow: 45px 0 0 #333; /* Second eye */
+}
+.eyes::after { /* Eye shine */
+    content:''; position: absolute; top: 3px; left: 3px; width: 4px; height: 4px; background: white; border-radius: 50%;
+    box-shadow: 45px 0 0 white;
+}
+.nose {
+    position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+    width: 20px; height: 14px; background: #FFAB91; border-radius: 50%; border: 2px solid #5a2d18;
+}
+
+/* The Content Label on the mole's chest */
+.mole-label {
+    background: #fff;
+    color: #333;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 1rem;
+    border: 3px solid #333;
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+}
+
+/* Mole "Hurt" State (when clicked) */
+.mole.whacked {
+    background: #7a3e22; /* Darker */
+    transition: bottom 0.1s; /* Sink fast */
+}
+.mole.whacked .eyes {
+    background: transparent;
+    box-shadow: none;
+    /* Turn eyes into X's */
+    content: 'X X';
+    color: #333;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: sans-serif;
+    width: 100%; top: 0;
+}
+.mole.whacked .eyes::after { display: none; }
+
+
+/* --- Modals --- */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 10000;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+    cursor: default; /* Regular cursor back in modla */
+}
+.modal-overlay.active {
+    opacity: 1; pointer-events: all;
+}
+.modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    border: 5px solid #333;
+    max-width: 500px; width: 90%;
+    box-shadow: 10px 10px 0 #333;
+    transform: scale(0.8); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: none; /* Hidden by default */
+}
+.modal-content.active {
+    display: block; transform: scale(1);
+}
+.close-modal {
+    float: right; font-size: 2rem; font-weight: bold; cursor: pointer; color: #333;
+    line-height: 20px;
+}
+
+/* Skills Grid Styling */
+.skills-grid {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px;
+}
+.skills-grid span {
+    background: var(--primary-color); color: #333;
+    padding: 8px 12px; border-radius: 8px; font-weight: bold; border: 2px solid #333;
+}
+ul { text-align: left; display: inline-block; margin-top: 15px; }
+li { margin-bottom: 10px; }

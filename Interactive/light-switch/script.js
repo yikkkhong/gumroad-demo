@@ -3,35 +3,35 @@ const portfolioItems = [
     {
         title: "The Noir Collection",
         type: "Fashion Editorial",
-        image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=1000",
+        image: "",
         desc: "A monochromatic exploration of shadow and silhouette in modern street style.",
         year: "2024"
     },
     {
         title: "Ceramic Void",
         type: "Product Design",
-        image: "https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&q=80&w=1000",
+        image: "",
         desc: "Hand-crafted pottery emphasizing negative space and ergonomic utility.",
         year: "2023"
     },
     {
         title: "Neon Horizons",
         type: "Digital Art",
-        image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1000",
+        image: "",
         desc: "Cyberpunk landscapes rendered in real-time using Unreal Engine 5.",
         year: "2024"
     },
     {
         title: "Botanical Synthetics",
         type: "Installation",
-        image: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80&w=1000",
+        image: "",
         desc: "Merging organic plant matter with recycled plastic polymers.",
         year: "2022"
     },
     {
         title: "Type & Texture",
         type: "Brand Identity",
-        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=1000",
+        image: "",
         desc: "A bold typographic system for a Swiss architecture firm.",
         year: "2023"
     }

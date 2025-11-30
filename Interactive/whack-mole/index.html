@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whack-a-Portfolio!</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="cursor">
+        <div class="hammer-head"></div>
+        <div class="hammer-handle"></div>
+    </div>
+
+    <div class="main-container">
+        <header>
+            <h1>Whack-a-Skill!</h1>
+            <p class="subtitle">Hit the moles to reveal my portfolio content.</p>
+            <div class="scoreboard-container">
+               <span>Score: <span id="score">0</span></span> 
+            </div>
+             <button id="start-btn" onclick="startGame()">Start Game!</button>
+        </header>
+
+        <div class="game-grid">
+            <div class="hole-container">
+                <div class="hole">
+                    <div class="mole" data-section="about">
+                        <div class="mole-face">
+                            <div class="eyes"></div>
+                            <div class="nose"></div>
+                        </div>
+                        <div class="mole-label">ABOUT</div>
+                    </div>
+                </div>
+                <div class="dirt-pile"></div>
+            </div>
+
+             <div class="hole-container">
+                <div class="hole">
+                     <div class="mole" data-section="projects">
+                        <div class="mole-face">
+                            <div class="eyes"></div>
+                            <div class="nose"></div>
+                        </div>
+                         <div class="mole-label">PROJECTS</div>
+                    </div>
+                </div>
+                <div class="dirt-pile"></div>
+            </div>
+
+             <div class="hole-container">
+                <div class="hole">
+                     <div class="mole" data-section="skills">
+                        <div class="mole-face">
+                            <div class="eyes"></div>
+                            <div class="nose"></div>
+                        </div>
+                         <div class="mole-label">SKILLS</div>
+                    </div>
+                </div>
+                <div class="dirt-pile"></div>
+            </div>
+
+             <div class="hole-container">
+                <div class="hole">
+                     <div class="mole" data-section="contact">
+                        <div class="mole-face">
+                            <div class="eyes"></div>
+                            <div class="nose"></div>
+                        </div>
+                         <div class="mole-label">CONTACT</div>
+                    </div>
+                </div>
+                <div class="dirt-pile"></div>
+            </div>
+             <div class="hole-container">
+                <div class="hole">
+                    <div class="mole" data-section="about">
+                        <div class="mole-face">
+                            <div class="eyes"></div>
+                            <div class="nose"></div>
+                        </div>
+                        <div class="mole-label">ABOUT</div>
+                    </div>
+                </div>
+                <div class="dirt-pile"></div>
+            </div>
+
+             <div class="hole-container">
+                <div class="hole">
+                     <div class="mole" data-section="projects">
+                        <div class="mole-face">
+                            <div class="eyes"></div>
+                            <div class="nose"></div>
+                        </div>
+                         <div class="mole-label">PROJECTS</div>
+                    </div>
+                </div>
+                <div class="dirt-pile"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal-overlay" id="modal-overlay">
+        
+        <div class="modal-content" id="modal-about">
+            <span class="close-modal">&times;</span>
+            <h2>🐹 About Me</h2>
+            <p>Welcome to my burrow! I'm a passionate frontend developer who believes the web should be fun. I specialize in creating interactive experiences and clean, efficient code.</p>
+        </div>
+
+        <div class="modal-content" id="modal-projects">
+            <span class="close-modal">&times;</span>
+            <h2>🚀 Recent Projects</h2>
+            <ul>
+                <li><strong>Project "Mole Buster":</strong> A JS game engine.</li>
+                <li><strong>E-Commerce Site:</strong> Built with React & Redux.</li>
+                <li><strong>Weather Dashboard:</strong> Using public APIs and charts.</li>
+            </ul>
+        </div>
+
+        <div class="modal-content" id="modal-skills">
+            <span class="close-modal">&times;</span>
+            <h2>⚡ My Toolbox</h2>
+            <div class="skills-grid">
+                <span>JavaScript ES6+</span>
+                <span>CSS3 / SCSS</span>
+                <span>HTML5</span>
+                <span>React.js</span>
+                <span>Git</span>
+                <span>UI/UX Design</span>
+            </div>
+        </div>
+
+        <div class="modal-content" id="modal-contact">
+            <span class="close-modal">&times;</span>
+            <h2>📬 Get in Touch</h2>
+            <p>Liked what you saw? Let's collaborate!</p>
+            <p>Email me at: <strong>dev@example.com</strong></p>
+            <p>Find me on LinkedIn / GitHub</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
