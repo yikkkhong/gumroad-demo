@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Portfolio | The Legend of Coder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="ui-layer">
+        <div class="hud">
+            <h1>LEGEND OF CODER</h1>
+            <p>ARROWS: Move | SPACE: Interact</p>
+            <div id="quest-log">Projects Viewed: <span id="skill-count">0</span>/3</div>
+        </div>
+    </div>
+
+    <div id="camera">
+        <div id="world-map">
+            <div id="terrain-layer"></div>
+            <div id="object-layer"></div>
+            <div id="hero"></div>
+        </div>
+    </div>
+
+    <div id="dialogue-box" class="hidden">
+        <h3 id="d-title">Title</h3>
+        <p id="d-content">Content...</p>
+        <p id="d-reward" class="reward-text"></p>
+        <button id="ok-btn" onclick="closeDialogue()">[ OK ] (Space)</button>
+    </div>
+
+    <div id="battle-screen" class="hidden">
+        <div class="battle-arena">
+            <div class="enemy-zone">
+                <div class="hp-box">
+                    <span id="enemy-name">BUG SLIME</span>
+                    <div class="hp-bar-bg"><div id="enemy-hp-bar" class="hp-fill"></div></div>
+                </div>
+                <div id="enemy-sprite"></div>
+            </div>
+
+            <div class="player-zone">
+                <div id="hero-battle-sprite"></div>
+                <div class="hp-box">
+                    <span>DEV HERO</span>
+                    <div class="hp-bar-bg"><div id="player-hp-bar" class="hp-fill"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="battle-menu">
+            <div id="combat-log">A wild BUG appeared!</div>
+            <div class="action-buttons">
+                <button onclick="battleAction('attack')">ATTACK</button>
+                <div id="magic-menu"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
