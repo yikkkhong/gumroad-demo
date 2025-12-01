@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Summoned Architect | RPG Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="scanlines"></div>
+    <div class="monitor-glow"></div>
+
+    <main class="game-container">
+        <header class="hud">
+            <div class="hp-bar">
+                <span>HP</span>
+                <div class="bar-container"><div class="bar-fill hp-fill"></div></div>
+            </div>
+            <div class="mp-bar">
+                <span>MP (Coffee)</span>
+                <div class="bar-container"><div class="bar-fill mp-fill"></div></div>
+            </div>
+            <div class="level-indicator">LVL. 99 DEV</div>
+        </header>
+
+        <div class="screen-content">
+            
+            <section class="character-pane">
+                <div class="pixel-avatar">
+                    <div class="hero-sprite"></div>
+                    <div class="shadow"></div>
+                </div>
+                <div class="dialogue-box">
+                    <p id="typing-text"></p>
+                    <span class="blinking-cursor">▼</span>
+                </div>
+            </section>
+
+            <section class="interface-pane">
+                <nav class="rpg-menu">
+                    <button class="menu-btn active" data-target="stats">STATUS</button>
+                    <button class="menu-btn" data-target="quests">QUESTS</button>
+                    <button class="menu-btn" data-target="skills">ABILITIES</button>
+                    <button class="menu-btn" data-target="contact">SUMMON</button>
+                </nav>
+
+                <div class="content-display">
+                    
+                    <div id="stats" class="panel active-panel">
+                        <h3>> PLAYER PROFILE</h3>
+                        <ul class="stat-list">
+                            <li><strong>Name:</strong> [Your Name]</li>
+                            <li><strong>Class:</strong> Full Stack Mage</li>
+                            <li><strong>Origin:</strong> Earth (Summoned)</li>
+                            <li><strong>Bio:</strong> A developer summoned to this world to craft digital experiences. Specializes in solving chaos with clean code structure.</li>
+                        </ul>
+                    </div>
+
+                    <div id="quests" class="panel">
+                        <h3>> QUEST LOG</h3>
+                        <div class="quest-item">
+                            <span class="quest-status">[COMPLETED]</span>
+                            <h4>E-Commerce Citadel</h4>
+                            <p>Built a fortress of trade using React & Node.js.</p>
+                        </div>
+                        <div class="quest-item">
+                            <span class="quest-status">[ONGOING]</span>
+                            <h4>The AI Grimoire</h4>
+                            <p>Training a neural network to predict user behavior.</p>
+                        </div>
+                    </div>
+
+                    <div id="skills" class="panel">
+                        <h3>> SKILL TREE</h3>
+                        <div class="skill-grid">
+                            <span class="skill-tag">HTML5 / CSS3</span>
+                            <span class="skill-tag">JavaScript (ES6+)</span>
+                            <span class="skill-tag">React.js</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">SQL Database</span>
+                            <span class="skill-tag">Pixel Art</span>
+                        </div>
+                    </div>
+
+                    <div id="contact" class="panel">
+                        <h3>> SEND TRANSMISSION</h3>
+                        <p>Do you require my magic for your party?</p>
+                        <form id="summon-form">
+                            <input type="email" placeholder="Enter Guild Email..." required>
+                            <textarea placeholder="Describe the mission..." rows="3"></textarea>
+                            <button type="submit" class="action-btn">CAST SPELL</button>
+                        </form>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
