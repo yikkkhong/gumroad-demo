@@ -21,7 +21,7 @@ It is a high-fidelity, interactive web portfolio inspired by the visual style of
 The scene features a 2.5D parallax depth effect where the user controls the camera angle with their mouse. It includes a physics-based particle system (sakura petals), procedural vegetation (grass), and dynamic water reflections.
 
 ### 2. KEY FEATURES
-* **Cinematic Parallax Engine:** A smooth, damped mouse-follow camera with "Overscan" rendering (120% width) to prevent black edges during tilting.
+* **Cinematic Parallax Effect:** A smooth, damped mouse-follow camera with "Overscan" rendering, the user controls the camera angle with their mouse.
 * **Procedural Generation:** Stars, clouds, grass blades, and fireflies are generated via JavaScript, creating a unique scene every reload.
 * **Physics Simulation:** * **Sakura Petals:** Each petal has independent wind resistance, rotation, and sway logic.
     * **Grass:** 500+ individual blades sway with CSS animations.
