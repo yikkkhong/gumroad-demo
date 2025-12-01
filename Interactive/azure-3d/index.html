@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Night Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Serif+JP:wght@300;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="loader">
+        <div class="loader-content">
+            <div class="torii-icon"></div>
+            <p>Constructing Reality...</p>
+            <div class="progress-bar"><div class="fill"></div></div>
+        </div>
+    </div>
+
+    <div class="ui-layer">
+        <header>
+            <div class="logo">AZURE</div>
+            <nav>
+                <span>SHRINE</span>
+                <span>WORKS</span>
+                <span>SCROLLS</span>
+                <span>CONTACT</span>
+            </nav>
+        </header>
+        
+        <div class="vignette"></div>
+        <div class="noise-grain"></div>
+        <div class="cinematic-bars"></div>
+    </div>
+
+    <div class="scene-wrapper">
+        <div id="world" class="world">
+
+            <svg style="width:0; height:0; position:absolute;">
+                <defs>
+                    <symbol id="icon-torii" viewBox="0 0 200 180">
+                        <path d="M20,40 L180,40 L185,30 L15,30 Z" fill="#1a1a1a" /> <path d="M30,55 L170,55 L170,45 L30,45 Z" fill="#2d2d2d" /> <rect x="50" y="55" width="15" height="125" fill="#1a1a1a" /> <rect x="135" y="55" width="15" height="125" fill="#1a1a1a" /> <rect x="55" y="160" width="5" height="20" fill="#000" opacity="0.5"/> <rect x="140" y="160" width="5" height="20" fill="#000" opacity="0.5"/>
+                    </symbol>
+                    
+                    <symbol id="icon-petal" viewBox="0 0 30 30">
+                        <path d="M15,30 C5,20 0,10 5,5 C10,0 15,10 15,10 C15,10 20,0 25,5 C30,10 25,20 15,30 Z" fill="white" />
+                    </symbol>
+                </defs>
+            </svg>
+
+            <div class="layer layer-sky" data-depth="0.05">
+                <div class="stars-container" id="stars"></div>
+                <div class="moon-glow"></div>
+                <div class="moon">
+                    <div class="crater c1"></div>
+                    <div class="crater c2"></div>
+                    <div class="crater c3"></div>
+                </div>
+                <div class="clouds-container" id="clouds"></div>
+            </div>
+
+            <div class="layer layer-mountains" data-depth="0.15">
+                <div class="mountain m-far"></div>
+                <div class="mountain m-mid"></div>
+                <div class="fog-layer"></div>
+            </div>
+
+            <div class="layer layer-lake" data-depth="0.4">
+                <div class="torii-gate-container">
+                    <svg class="torii-svg"><use href="#icon-torii"></use></svg>
+                    <svg class="torii-svg reflection"><use href="#icon-torii"></use></svg>
+                </div>
+                
+                <div class="water-surface">
+                    <div class="reflection-glow"></div>
+                    <div class="ripples"></div>
+                </div>
+                
+                <div class="lantern l1">
+                    <div class="lantern-body"></div>
+                    <div class="lantern-light"></div>
+                    <div class="lantern-reflection"></div>
+                </div>
+                <div class="lantern l2">
+                    <div class="lantern-body"></div>
+                    <div class="lantern-light"></div>
+                    <div class="lantern-reflection"></div>
+                </div>
+            </div>
+
+            <div class="layer layer-content" data-depth="0.6">
+                
+                <div class="info-card p1">
+                    <div class="card-glass"></div>
+                    <div class="card-border"></div>
+                    <div class="card-inner">
+                        <h3>PROJECT 01</h3>
+                        <h2>NEON COMMERCE</h2>
+                        <div class="tags">
+                            <span>REACT</span><span>THREE.JS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card p2">
+                    <div class="card-glass"></div>
+                    <div class="card-border"></div>
+                    <div class="card-inner">
+                        <h3>PROJECT 02</h3>
+                        <h2>VOID ENGINE</h2>
+                        <div class="tags">
+                            <span>WEBGL</span><span>RUST</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card profile">
+                    <div class="card-glass"></div>
+                    <div class="card-border"></div>
+                    <div class="card-inner">
+                        <h3>THE ARCHITECT</h3>
+                        <h2>ABOUT ME</h2>
+                        <p>Weaving logic into visual poetry.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layer layer-nature" data-depth="0.8">
+                <div class="grass-field" id="grass-field"></div>
+                
+                <div class="bush-dark left"></div>
+                <div class="bush-dark right"></div>
+            </div>
+
+            <div class="layer layer-fx" data-depth="1.2">
+                <div id="sakura-container"></div>
+                
+                <div id="firefly-container"></div>
+                
+                <div class="lens-flare"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

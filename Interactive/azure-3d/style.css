@@ -1,0 +1,485 @@
+/* =========================================
+   1. GLOBAL VARIABLES & RESET
+   ========================================= */
+:root {
+    /* --- PALETTE: THE AZURE NIGHT --- */
+    --void-black: #05070a;
+    --night-sky-top: #0b1026;
+    --night-sky-bot: #2b32b2;
+    --moon-glow: #bdc3c7;
+    
+    /* --- ATMOSPHERE --- */
+    --mist-color: rgba(43, 50, 178, 0.3);
+    --water-base: rgba(11, 16, 38, 0.8);
+    --water-highlight: rgba(100, 200, 255, 0.1);
+    
+    /* --- ACCENTS --- */
+    --lantern-core: #f1c40f;
+    --lantern-glow: #e67e22;
+    --sakura-pink: #ffafbd;
+    --text-gold: #f4e7c3;
+    
+    /* --- FONTS --- */
+    --font-header: 'Cinzel', serif;
+    --font-body: 'Noto Serif JP', serif;
+    
+    /* --- Z-INDEX LAYERS --- */
+    --z-sky: 10;
+    --z-mountains: 20;
+    --z-lake: 30;
+    --z-content: 40;
+    --z-nature: 50;
+    --z-fx: 60;
+    --z-ui: 100;
+    --z-loader: 999;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--void-black);
+    color: white;
+    font-family: var(--font-body);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* No scrollbars */
+}
+
+/* =========================================
+   2. LOADING SCREEN
+   ========================================= */
+#loader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--void-black);
+    z-index: var(--z-loader);
+    display: flex; justify-content: center; align-items: center;
+    transition: opacity 1s ease-out;
+}
+
+.loader-content {
+    text-align: center;
+    opacity: 0.8;
+}
+
+.torii-icon {
+    width: 50px; height: 40px;
+    border: 4px solid var(--text-gold);
+    border-bottom: none;
+    margin: 0 auto 20px;
+    position: relative;
+    box-shadow: 0 0 15px var(--lantern-glow);
+}
+.torii-icon::after {
+    content:''; position: absolute; top: 10px; left: -10px; width: 62px; height: 4px; background: var(--text-gold);
+}
+
+.progress-bar {
+    width: 200px; height: 2px; background: #333; margin: 10px auto; position: relative; overflow: hidden;
+}
+.fill {
+    position: absolute; left: 0; top: 0; height: 100%; width: 0%;
+    background: var(--text-gold);
+    animation: loadProgress 1.5s ease-out forwards;
+}
+@keyframes loadProgress { 0% {width:0%} 100% {width: 100%} }
+
+/* =========================================
+   3. UI LAYER (HUD, Vignette, Noise)
+   ========================================= */
+.ui-layer {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: var(--z-ui); pointer-events: none;
+}
+
+/* Cinematic Grain Effect */
+.noise-grain {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0.05;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)"/></svg>');
+    pointer-events: none;
+}
+
+/* Vignette */
+.vignette {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, transparent 50%, black 120%);
+}
+
+/* Cinematic Black Bars */
+.cinematic-bars::before, .cinematic-bars::after {
+    content: ''; position: absolute; left: 0; width: 100%; height: 60px;
+    background: black; z-index: 10;
+}
+.cinematic-bars::before { top: 0; }
+.cinematic-bars::after { bottom: 0; }
+
+/* Header Navigation */
+header {
+    position: absolute; top: 60px; left: 0; width: 100%;
+    padding: 20px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    pointer-events: auto; /* Allow clicks */
+}
+
+.logo {
+    font-family: var(--font-header);
+    font-size: 1.5rem; letter-spacing: 5px; color: var(--text-gold);
+    text-shadow: 0 0 10px rgba(244, 231, 195, 0.5);
+}
+
+nav span {
+    margin-left: 30px; font-size: 0.8rem; letter-spacing: 2px;
+    color: rgba(255,255,255,0.7); cursor: pointer; position: relative;
+    transition: color 0.3s;
+}
+nav span:hover { color: white; text-shadow: 0 0 8px white; }
+nav span::after {
+    content:''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 1px;
+    background: var(--text-gold); transition: width 0.3s;
+}
+nav span:hover::after { width: 100%; }
+
+/* =========================================
+   4. THE 3D SCENE WRAPPER
+   ========================================= */
+.scene-wrapper {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    perspective: 1000px; /* The 3D Lens */
+    overflow: hidden;
+}
+
+.world {
+    position: relative; width: 100%; height: 100%;
+    transform-style: preserve-3d;
+    will-change: transform; /* Performance Hint */
+}
+
+.layer {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    transform-style: preserve-3d;
+    display: flex; justify-content: center; align-items: center;
+}
+
+/* Applying Depth via Transform Z based on Data Attribute logic (Done in JS, but base CSS needed) */
+.layer-sky       { transform: translateZ(-300px) scale(1.3); }
+.layer-mountains { transform: translateZ(-150px) scale(1.15); }
+.layer-lake      { transform: translateZ(-50px) scale(1.05); }
+.layer-content   { transform: translateZ(0px); }
+.layer-nature    { transform: translateZ(50px) scale(0.95); pointer-events: none; }
+.layer-fx        { transform: translateZ(100px) scale(0.9); pointer-events: none; }
+
+/* =========================================
+   5. LAYER 0: THE COSMOS (Sky, Stars, Moon)
+   ========================================= */
+.layer-sky {
+    background: linear-gradient(to bottom, var(--night-sky-top) 0%, #1c234a 60%, #4a69bd 100%);
+}
+
+.stars-container {
+    position: absolute; width: 100%; height: 100%;
+}
+
+.star {
+    position: absolute; background: white; border-radius: 50%;
+    animation: twinkle linear infinite;
+}
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 5px white; }
+}
+
+.moon {
+    position: absolute; top: 15%; right: 20%;
+    width: 120px; height: 120px;
+    background: #fdfefe;
+    border-radius: 50%;
+    box-shadow: 0 0 60px var(--moon-glow), inset -20px -20px 50px rgba(0,0,0,0.1);
+}
+.moon-glow {
+    position: absolute; top: 15%; right: 20%;
+    width: 120px; height: 120px; border-radius: 50%;
+    background: transparent;
+    box-shadow: 0 0 150px 20px rgba(189, 195, 199, 0.4);
+    z-index: -1;
+}
+.crater {
+    position: absolute; background: rgba(0,0,0,0.05); border-radius: 50%;
+}
+.c1 { width: 20px; height: 20px; top: 30%; left: 30%; }
+.c2 { width: 10px; height: 10px; top: 60%; left: 60%; }
+.c3 { width: 30px; height: 30px; top: 40%; left: 60%; }
+
+/* Procedural Clouds */
+.clouds-container {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+}
+.cloud {
+    position: absolute;
+    width: 300px; height: 100px;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+    filter: blur(20px);
+    animation: drift linear infinite;
+}
+@keyframes drift { from { transform: translateX(100vw); } to { transform: translateX(-100vw); } }
+
+/* =========================================
+   6. LAYER 1: MOUNTAINS & MIST
+   ========================================= */
+.mountain {
+    position: absolute; bottom: 0;
+    width: 0; height: 0;
+    filter: blur(1px);
+}
+
+.m-far {
+    left: 10%; bottom: 150px;
+    border-left: 400px solid transparent;
+    border-right: 400px solid transparent;
+    border-bottom: 300px solid #141b36; /* Dark Blue */
+    opacity: 0.8;
+}
+
+.m-mid {
+    right: 0%; bottom: 100px;
+    border-left: 600px solid transparent;
+    border-right: 200px solid transparent;
+    border-bottom: 400px solid #0f1429; /* Darker Blue */
+}
+
+.fog-layer {
+    position: absolute; bottom: 0; width: 100%; height: 400px;
+    background: linear-gradient(to top, var(--mist-color) 0%, transparent 100%);
+    filter: blur(10px);
+}
+
+/* =========================================
+   7. LAYER 2: THE SHRINE LAKE (Water & Torii)
+   ========================================= */
+/* The Lake Surface - Perspective Plane */
+.water-surface {
+    position: absolute; bottom: 0; width: 200%; height: 350px;
+    background: linear-gradient(to bottom, var(--water-base), #000);
+    left: -50%;
+    transform-origin: bottom;
+    opacity: 0.9;
+    overflow: hidden;
+}
+
+/* Ripples */
+.ripples {
+    position: absolute; width: 100%; height: 100%;
+    background: repeating-radial-gradient(
+        circle at 50% 0%, 
+        transparent 0, 
+        transparent 10px, 
+        rgba(100,200,255,0.05) 11px, 
+        transparent 12px
+    );
+    animation: rippleMove 20s linear infinite;
+    mask-image: linear-gradient(to bottom, transparent, white);
+}
+@keyframes rippleMove { from { transform: scale(1); opacity: 0.5; } to { transform: scale(1.5); opacity: 0; } }
+
+/* Torii Gate */
+.torii-gate-container {
+    position: absolute; bottom: 250px; left: 50%;
+    transform: translateX(-50%);
+    width: 200px; height: 180px;
+    z-index: 5;
+}
+
+.torii-svg {
+    width: 100%; height: 100%;
+    filter: drop-shadow(0 0 10px black);
+}
+
+/* The Reflection Trick */
+.torii-svg.reflection {
+    transform: scaleY(-1) translateY(-170px); /* Flip and move down */
+    opacity: 0.3;
+    filter: blur(2px) drop-shadow(0 0 10px var(--lantern-glow));
+    mask-image: linear-gradient(to top, transparent, white 80%);
+}
+
+/* Lanterns */
+.lantern {
+    position: absolute; width: 20px; height: 30px;
+    animation: floatLantern 6s ease-in-out infinite;
+}
+.l1 { bottom: 280px; left: 30%; animation-delay: 0s; }
+.l2 { bottom: 260px; right: 25%; animation-delay: 3s; scale: 0.8; }
+
+.lantern-body {
+    width: 100%; height: 100%; background: var(--lantern-glow);
+    border-radius: 4px;
+    box-shadow: 0 0 20px var(--lantern-glow);
+}
+.lantern-light {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 8px; height: 8px; background: #fff; border-radius: 50%;
+    filter: blur(2px);
+}
+/* Lantern Reflection */
+.lantern-reflection {
+    position: absolute; top: 35px; left: 0; width: 20px; height: 30px;
+    background: var(--lantern-glow);
+    transform: scaleY(-1);
+    opacity: 0.2; filter: blur(4px);
+}
+@keyframes floatLantern { 
+    0%, 100% { transform: translateY(0); } 
+    50% { transform: translateY(-10px); } 
+}
+
+/* =========================================
+   8. LAYER 3: GLASSMORPHISM CARDS
+   ========================================= */
+.layer-content {
+    display: flex; justify-content: center; align-items: center; gap: 40px;
+}
+
+.info-card {
+    width: 280px; height: 380px;
+    position: relative;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Glass Effect */
+.card-glass {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(16, 22, 45, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+/* Animated Border Gradient */
+.card-border {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent) border-box;
+    mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+.card-inner {
+    position: relative; padding: 30px; color: white;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    height: 100%; transform: translateZ(20px);
+}
+
+.info-card h3 {
+    font-size: 0.7rem; letter-spacing: 2px; color: var(--text-gold);
+    margin-bottom: 5px; opacity: 0.8;
+}
+
+.info-card h2 {
+    font-family: var(--font-header); font-size: 1.8rem; margin-bottom: 20px;
+    background: linear-gradient(to right, #fff, #bdc3c7);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.tags span {
+    display: inline-block; font-size: 0.6rem; 
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 4px 8px; margin-right: 5px; border-radius: 20px;
+    background: rgba(0,0,0,0.3);
+}
+
+/* Hover Physics */
+.info-card:hover {
+    transform: translateY(-20px) rotateX(5deg) rotateY(-5deg);
+}
+.info-card:hover .card-glass {
+    background: rgba(30, 40, 70, 0.7);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 20px rgba(43, 50, 178, 0.3);
+}
+
+.p1 { margin-top: -50px; }
+.p2 { margin-top: 50px; }
+
+/* =========================================
+   9. LAYER 4: NATURE (Procedural Grass)
+   ========================================= */
+.grass-field {
+    position: absolute; bottom: 0; width: 100%; height: 150px;
+    z-index: 10;
+}
+
+.grass-blade {
+    position: absolute; bottom: -20px; width: 4px;
+    background: linear-gradient(to top, #020406 0%, #112d20 60%, #1e4533 100%);
+    border-radius: 50% 50% 0 0;
+    transform-origin: bottom center;
+    animation: sway 3s ease-in-out infinite alternate;
+}
+.grass-light { background: linear-gradient(to top, #051410 0%, #205c45 100%); width: 3px; z-index: 2; opacity: 0.8; }
+.grass-dark { background: #000; width: 5px; z-index: 1; filter: blur(1px); }
+
+@keyframes sway {
+    0% { transform: rotate(var(--lean, 5deg)); }
+    100% { transform: rotate(calc(var(--lean, 5deg) + 10deg)); }
+}
+
+/* Silhouette Bushes */
+.bush-dark {
+    position: absolute; bottom: -50px;
+    width: 600px; height: 300px;
+    background: #020202;
+    border-radius: 50%;
+    filter: blur(5px);
+}
+.left { left: -200px; }
+.right { right: -200px; height: 400px; }
+
+/* =========================================
+   10. LAYER 5: FX & ATMOSPHERE (Petals & Fireflies)
+   ========================================= */
+/* Sakura */
+#sakura-container {
+    position: absolute; width: 100%; height: 100%; pointer-events: none;
+}
+.petal {
+    position: absolute; width: 15px; height: 15px;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 5px var(--sakura-pink));
+}
+.petal svg path { fill: var(--sakura-pink); }
+
+/* Fireflies */
+#firefly-container {
+    position: absolute; width: 100%; height: 100%; pointer-events: none;
+}
+.firefly {
+    position: absolute; width: 4px; height: 4px;
+    background: #ccff00;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ccff00, 0 0 20px #ccff00;
+    animation: fireflyGlow 3s infinite alternate;
+}
+@keyframes fireflyGlow { 0% {opacity: 0.4; scale:0.8;} 100% {opacity: 1; scale:1.2;} }
+
+/* Lens Flare / Bloom */
+.lens-flare {
+    position: absolute; top: -10%; right: -10%; width: 50%; height: 50%;
+    background: radial-gradient(circle, rgba(43, 50, 178, 0.2) 0%, transparent 70%);
+    mix-blend-mode: screen;
+    pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .layer-content { flex-direction: column; gap: 20px; }
+    .info-card { width: 80%; height: 200px; }
+    h1 { font-size: 1.5rem; }
+    .torii-gate-container { width: 150px; }
+}
