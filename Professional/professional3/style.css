@@ -1,0 +1,227 @@
+/* --- Variables & Reset --- */
+:root {
+    --bg-color: #F4F1EA; /* Cream/Paper color - feels expensive */
+    --text-color: #1a1a1a;
+    --accent: #D94426; /* Burnt Orange for subtle pop */
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Manrope', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none; /* Hides default cursor */
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* --- Custom Cursor --- */
+.cursor {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: var(--text-color);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
+
+.cursor-follower {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--text-color);
+    border-radius: 50%;
+    z-index: 9998;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, background 0.3s;
+}
+
+/* Hover state for cursor */
+.cursor-active {
+    width: 80px;
+    height: 80px;
+    background: rgba(217, 68, 38, 0.1); /* Subtle orange tint */
+    border-color: transparent;
+    mix-blend-mode: difference;
+}
+
+/* --- Navigation --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 60px;
+    align-items: center;
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: -0.5px;
+}
+
+.menu-btn {
+    border: 1px solid var(--text-color);
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    transition: 0.3s;
+}
+
+.menu-btn:hover { background: var(--text-color); color: var(--bg-color); }
+
+/* --- Hero Section --- */
+#hero {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 60px;
+    position: relative;
+}
+
+.subtitle {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+h1 {
+    font-size: 10vw; /* Massive responsive text */
+    line-height: 0.9;
+    font-weight: 800;
+    color: var(--text-color);
+}
+
+.italic {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+}
+
+/* --- Marquee Strip --- */
+.marquee-strip {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 15px 0;
+    white-space: nowrap;
+}
+
+.marquee-content {
+    display: inline-block;
+    animation: scroll 20s linear infinite;
+    font-weight: 800;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+@keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* --- Work Grid (Bento Style) --- */
+#works { padding: 100px 60px; }
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 60px;
+    border-bottom: 2px solid var(--text-color);
+    padding-bottom: 20px;
+}
+
+.section-header h2 { font-family: var(--font-serif); font-size: 3rem; }
+
+.work-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 400px 400px;
+    gap: 20px;
+}
+
+.work-item {
+    position: relative;
+    overflow: hidden;
+    background: #ccc;
+    border-radius: 4px; /* Slight rounding */
+    transition: transform 0.4s ease;
+}
+
+.item-1 { grid-row: 1 / 2; grid-column: 1 / 2; background: #333; }
+.item-2 { grid-row: 1 / 3; grid-column: 2 / 3; background: #555; }
+.item-3 { grid-row: 2 / 3; grid-column: 1 / 2; background: #777; }
+
+.work-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s;
+}
+
+/* Placeholder Colors for images */
+.item-1 .work-img { background-color: #2b2d42; } 
+.item-2 .work-img { background-color: #8d99ae; }
+.item-3 .work-img { background-color: #edf2f4; }
+
+.work-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: #fff;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.4s;
+}
+
+.work-item:hover .work-img { transform: scale(1.1); }
+.work-item:hover .work-overlay { opacity: 1; transform: translateY(0); }
+
+/* --- Footer --- */
+footer {
+    height: 60vh;
+    background: var(--text-color);
+    color: var(--bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+footer h2 { font-size: 6vw; font-family: var(--font-serif); margin-bottom: 40px; transition: 0.3s; }
+footer h2:hover { color: var(--accent); }
+
+.footer-links { display: flex; gap: 40px; justify-content: center; margin-bottom: 40px; }
+.copyright { font-size: 0.8rem; opacity: 0.5; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    h1 { font-size: 15vw; }
+    .work-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+    nav { padding: 20px; }
+    #hero, #works { padding: 40px 20px; }
+}

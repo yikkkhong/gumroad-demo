@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">PORTFOLIO<span class="dot">.</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content hidden">
+            <h3>Hello, I am</h3>
+            <h1 class="glitch-text">Creative Developer</h1>
+            <p>I build <span class="typing-text"></span></p>
+            <a href="#work" class="btn-primary">View My Work</a>
+        </div>
+        <div class="hero-graphic hidden">
+            <div class="glowing-orb"></div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title hidden">My Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-card hidden">
+                    <i class="fab fa-html5"></i>
+                    <h3>Frontend</h3>
+                    <p>HTML5, CSS3, React, Tailwind</p>
+                </div>
+                <div class="skill-card hidden" style="transition-delay: 100ms;">
+                    <i class="fas fa-code"></i>
+                    <h3>Backend</h3>
+                    <p>Node.js, Python, Databases</p>
+                </div>
+                <div class="skill-card hidden" style="transition-delay: 200ms;">
+                    <i class="fas fa-pen-nib"></i>
+                    <h3>UI/UX Design</h3>
+                    <p>Figma, Prototyping, Motion</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="section">
+        <div class="container">
+            <h2 class="section-title hidden">Selected Works</h2>
+            <div class="projects-grid">
+                <div class="project-card hidden">
+                    <div class="card-image"></div>
+                    <div class="card-info">
+                        <h3>FinTech Dashboard</h3>
+                        <p>A reactive financial data visualization tool.</p>
+                        <a href="#">View Case <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="project-card hidden" style="transition-delay: 100ms;">
+                    <div class="card-image project-2"></div>
+                    <div class="card-info">
+                        <h3>E-Commerce App</h3>
+                        <p>Full-stack shopping experience with Stripe.</p>
+                        <a href="#">View Case <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="project-card hidden" style="transition-delay: 200ms;">
+                    <div class="card-image project-3"></div>
+                    <div class="card-info">
+                        <h3>AI SaaS Landing</h3>
+                        <p>High-conversion landing page with 3D elements.</p>
+                        <a href="#">View Case <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container contact-container hidden">
+            <h2>Let's create something extraordinary.</h2>
+            <p>Open for freelance opportunities and collaborations.</p>
+            <a href="mailto:email@example.com" class="btn-primary">Get in Touch</a>
+            
+            <div class="socials">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Professional Portfolio. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
