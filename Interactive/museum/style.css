@@ -1,0 +1,455 @@
+:root {
+    --bg-color: #e0e0e0;
+    --room-size: 2000px;
+    --wall-height: 900px;
+    --wall-white: #fdfdfd;
+    --accent-blue: #2c3e50;
+    --wood: #a67c52;
+    --gold: #ffd700;
+    --purple: #7c3aed;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: var(--bg-color);
+    font-family: 'Inter', sans-serif;
+    color: #333;
+}
+
+#blocker {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+#instructions {
+    text-align: center;
+    border: 2px solid #333;
+    padding: 40px;
+    background: #fff;
+    border-radius: 8px;
+}
+
+#instructions h1 {
+    letter-spacing: 5px;
+    margin: 0 0 20px 0;
+    font-size: 3rem;
+}
+
+#instructions p {
+    font-size: 1.2rem;
+    margin: 20px 0;
+}
+
+.keys {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.keys span {
+    background: #333;
+    color: #fff;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+}
+
+/* --- INFO OVERLAY --- */
+#info-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+#info-overlay.hidden {
+    display: none;
+}
+
+.info-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 40px;
+    max-width: 600px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+#info-title {
+    margin: 0 0 15px 0;
+    font-size: 28px;
+    color: var(--purple);
+}
+
+#info-description {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #555;
+    margin: 0 0 20px 0;
+}
+
+#info-tech {
+    font-size: 13px;
+    color: #777;
+}
+
+#tech-list {
+    color: var(--accent-blue);
+    font-weight: 600;
+}
+
+/* --- 3D SETUP --- */
+#viewport {
+    width: 100vw;
+    height: 100vh;
+    perspective: 800px;
+    background: #e0e0e0;
+}
+
+#camera-pitch,
+#camera-yaw,
+#world {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    position: absolute;
+}
+
+#world {
+    top: 50%;
+    left: 50%;
+}
+
+/* --- ARCHITECTURE --- */
+.floor {
+    position: absolute;
+    width: var(--room-size);
+    height: var(--room-size);
+    background: radial-gradient(circle, #fff 0%, #dcdcdc 80%);
+    transform: translate(-50%, -50%) rotateX(90deg) translateZ(450px);
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.1);
+}
+
+.ceiling {
+    position: absolute;
+    width: var(--room-size);
+    height: var(--room-size);
+    background-color: #f4f4f4;
+    transform: translate(-50%, -50%) rotateX(-90deg) translateZ(450px);
+    transform-style: preserve-3d;
+}
+
+.light-track {
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.9), 0 0 10px rgba(255, 255, 255, 1);
+}
+
+.track-left {
+    width: 20px;
+    height: 1600px;
+    left: 20%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.track-right {
+    width: 20px;
+    height: 1600px;
+    right: 20%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.track-center {
+    width: 400px;
+    height: 800px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.8;
+}
+
+/* --- WALLS --- */
+.wall {
+    position: absolute;
+    width: var(--room-size);
+    height: var(--wall-height);
+    background: var(--wall-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translate(-50%, -50%);
+    backface-visibility: hidden;
+    border-bottom: 12px solid #ddd;
+    box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.05);
+}
+
+.wall-north {
+    transform: translate(-50%, -50%) translateZ(-1000px);
+}
+
+.wall-south {
+    transform: translate(-50%, -50%) rotateY(180deg) translateZ(-1000px);
+}
+
+.wall-east {
+    transform: translate(-50%, -50%) rotateY(90deg) translateZ(-1000px);
+}
+
+.wall-west {
+    transform: translate(-50%, -50%) rotateY(-90deg) translateZ(-1000px);
+}
+
+/* --- DECORATIONS --- */
+.bench-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-style: preserve-3d;
+    transform: translate(-50%, -50%) translateY(200px);
+}
+
+.bench-top {
+    position: absolute;
+    width: 400px;
+    height: 150px;
+    background: var(--wood);
+    transform: translate(-50%, -50%) rotateX(90deg) translateZ(-50px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.bench-leg {
+    position: absolute;
+    width: 20px;
+    height: 80px;
+    background: #333;
+}
+
+.leg-1 {
+    transform: translate3d(-150px, 40px, 0);
+}
+
+.leg-2 {
+    transform: translate3d(150px, 40px, 0);
+}
+
+.info-stand {
+    position: absolute;
+    transform-style: preserve-3d;
+    transform: translate3d(-300px, 200px, 600px) rotateY(30deg);
+}
+
+.stand-pole {
+    width: 10px;
+    height: 200px;
+    background: #333;
+}
+
+.stand-board {
+    position: absolute;
+    top: -50px;
+    left: -45px;
+    width: 100px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ccc;
+    transform: rotateX(-30deg);
+    padding: 10px;
+    text-align: center;
+    font-size: 10px;
+}
+
+/* --- ARTWORK STYLING --- */
+.wall-accent-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--accent-blue);
+    clip-path: polygon(20% 0, 80% 0, 80% 100%, 20% 100%);
+}
+
+.artwork-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #d4ea66 0%, #a24b4b 100%);
+    border-radius: 4px;
+}
+
+.artwork-placeholder.featured {
+    background: linear-gradient(135deg, var(--gold) 0%, #ff9500 100%);
+}
+
+.artwork-large {
+    z-index: 2;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transform: translateZ(5px);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.artwork-large:hover {
+    transform: translateZ(10px) scale(1.02);
+}
+
+.featured-project {
+    position: relative;
+    border: 3px solid var(--gold);
+}
+
+.featured-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--gold);
+    color: #333;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    z-index: 10;
+}
+
+.featured-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+    border-radius: 4px;
+    pointer-events: none;
+    animation: glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.label-card {
+    margin-top: 15px;
+}
+
+.label-card h2 {
+    margin: 0;
+    font-weight: 600;
+    color: var(--purple);
+}
+
+.label-card p {
+    color: #666;
+    font-size: 0.9em;
+    margin: 5px 0 0 0;
+}
+
+.artwork-row {
+    display: flex;
+    gap: 100px;
+}
+
+.west-row {
+    flex-direction: column;
+    gap: 80px;
+}
+
+.artwork-item {
+    background: #fff;
+    padding: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s;
+    position: relative;
+    cursor: pointer;
+    border-radius: 4px;
+    min-width: 250px;
+    min-height: 180px;
+}
+
+.artwork-item:hover {
+    transform: translateZ(20px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.caption {
+    font-size: 0.85rem;
+    color: #333;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.spotlight-hit {
+    position: absolute;
+    top: -150px;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: radial-gradient(ellipse at bottom, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.glass-door {
+    border: 2px solid #ccc;
+    padding: 20px 60px;
+    color: #999;
+    letter-spacing: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 4px;
+}

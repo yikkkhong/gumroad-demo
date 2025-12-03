@@ -47,11 +47,6 @@ Customization tips
 - Button placement: small visual offsets use `position: relative; top: Xpx;` in `.btn-primary` or adjust container spacing as needed.
 - Modal content: edit the modal template in `index.html` and update `script.js` logic for dynamic population.
 
-Deployment
-----------
-- This is a static site — deploy to GitHub Pages, Netlify, Vercel, or any static host.
-- For GitHub Pages: push the repo and enable Pages for the `main` branch (or use the `gh-pages` branch).
-
 License & Attribution
 ---------------------
 - Font Awesome is loaded via CDN — check their license if you change usage.

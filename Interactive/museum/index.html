@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Bright Gallery</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="blocker">
+        <div id="instructions">
+            <h1>DIGITAL EXHIBITION</h1>
+            <p>Click to Enter</p>
+            <div class="keys">
+                <span>MOUSE: Look</span>
+                <span>WASD: Walk</span>
+            </div>
+        </div>
+    </div>
+    <div id="info-overlay" class="hidden">
+        <div class="info-card">
+            <button class="close-btn">&times;</button>
+            <h2 id="info-title">Project Title</h2>
+            <p id="info-description">Project description goes here</p>
+            <p id="info-tech"><strong>Tech Stack:</strong> <span id="tech-list"></span></p>
+        </div>
+    </div>
+    <div id="viewport">
+        <div id="camera-pitch">
+            <div id="camera-yaw">
+                <div id="world">
+                    
+                    <div class="floor"></div>
+                    <div class="ceiling">
+                        <div class="light-track track-left"></div>
+                        <div class="light-track track-right"></div>
+                        <div class="light-track track-center"></div>
+                    </div>
+                    <div class="bench-container">
+                        <div class="bench-top"></div>
+                        <div class="bench-leg leg-1"></div>
+                        <div class="bench-leg leg-2"></div>
+                    </div>
+                    <div class="info-stand">
+                        <div class="stand-pole"></div>
+                        <div class="stand-board">
+                            <h4>GUIDE</h4>
+                            <p>Click projects to view details</p>
+                        </div>
+                    </div>
+                    <div class="wall wall-north">
+                        <div class="wall-accent-bg"></div>
+                        <div class="artwork-large featured-project" data-project="0">
+                            <div class="featured-badge">⭐ FEATURED ⭐</div>
+                            <div class="featured-glow"></div>
+                            <div class="shadow-box"></div>
+                            <div class="artwork-placeholder featured"></div>
+                            <div class="label-card">
+                                <h2>AI Analytics Dashboard</h2>
+                                <p>Advanced data visualization with ML predictions</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wall wall-south">
+                        <div class="glass-door">EXIT</div>
+                    </div>
+                    <div class="wall wall-east">
+                        <div class="artwork-row">
+                            <div class="artwork-item project-card" data-project="1">
+                                <div class="spotlight-hit"></div>
+                                <div class="artwork-placeholder"></div>
+                                <p class="caption">E-Commerce Platform</p>
+                            </div>
+                            <div class="artwork-item project-card" data-project="2">
+                                <div class="spotlight-hit"></div>
+                                <div class="artwork-placeholder"></div>
+                                <p class="caption">Mobile App Design</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wall wall-west">
+                        <div class="artwork-row west-row">
+                            <div class="artwork-item project-card" data-project="3">
+                                <div class="spotlight-hit"></div>
+                                <div class="artwork-placeholder"></div>
+                                <p class="caption">Climate Visualization</p>
+                            </div>
+                            <div class="artwork-item project-card" data-project="4">
+                                <div class="spotlight-hit"></div>
+                                <div class="artwork-placeholder"></div>
+                                <p class="caption">Real-time Chat App</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

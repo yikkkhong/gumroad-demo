@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyOS Browser - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="browser-window">
+        
+        <div class="browser-header">
+            <div class="window-controls">
+                <span class="control close"></span>
+                <span class="control minimize"></span>
+                <span class="control maximize"></span>
+            </div>
+            <div class="tabs-container">
+                <button class="tab active" data-target="home">Home.html</button>
+                <button class="tab" data-target="about">About.css</button>
+                <button class="tab" data-target="projects">Projects.js</button>
+                <button class="tab" data-target="contact">Contact.json</button>
+                <button class="tab new-tab">+</button>
+            </div>
+        </div>
+
+        <div class="browser-nav-bar">
+            <div class="nav-buttons">
+                <button id="btn-back">←</button>
+                <button id="btn-refresh">↻</button>
+            </div>
+            <div class="address-bar-container">
+                <span class="protocol">secure://</span>
+                <input type="text" id="address-input" value="portfolio/home" placeholder="Search projects or enter URL...">
+                <button id="btn-go">GO</button>
+            </div>
+            <div class="menu-icon">≡</div>
+        </div>
+
+        <div class="browser-viewport">
+            
+            <section id="home" class="page active">
+                <div class="hero">
+                    <h1>Hello, I'm a Developer.</h1>
+                    <p>Welcome to my personal web terminal.</p>
+                    <button class="cta-btn" onclick="document.querySelector('[data-target=\'projects\']').click()">View Work</button>
+                </div>
+            </section>
+
+            <section id="about" class="page">
+                <h2>// About Me</h2>
+                <div class="content-block">
+                    <p>I am a frontend developer passionate about building interactive web experiences. I don't just write code; I craft worlds that live inside the browser.</p>
+                    <div class="skills">
+                        <span class="tag">HTML5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">React</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects" class="page">
+                <h2>// Project List</h2>
+                <div class="project-grid" id="project-list">
+                    <div class="project-card" data-name="shop e-commerce store">
+                        <div class="card-header">project_01</div>
+                        <h3>Minimalist E-Commerce</h3>
+                        <p>A responsive shopping platform built with React and Redux.</p>
+                    </div>
+                    <div class="project-card" data-name="blog personal markdown">
+                        <div class="card-header">project_02</div>
+                        <h3>Markdown Blog System</h3>
+                        <p>Static site generator with instant rendering capabilities.</p>
+                    </div>
+                    <div class="project-card" data-name="weather app api data">
+                        <div class="card-header">project_03</div>
+                        <h3>Live Weather Panel</h3>
+                        <p>Data visualization dashboard using the OpenWeather API.</p>
+                    </div>
+                     <div class="project-card" data-name="game canvas pixel">
+                        <div class="card-header">project_04</div>
+                        <h3>Canvas Pixel Shooter</h3>
+                        <p>A retro-style shooting game written in pure JavaScript.</p>
+                    </div>
+                </div>
+                <p id="no-result" style="display:none; color: #ff4757;">Error 404: Project not found...</p>
+            </section>
+
+            <section id="contact" class="page">
+                <h2>// Send Signal</h2>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label>Sender ID:</label>
+                        <input type="text" placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Encrypted Message:</label>
+                        <textarea placeholder="Type your message here..."></textarea>
+                    </div>
+                    <button type="button" class="cta-btn">Send Packet</button>
+                </form>
+            </section>
+
+        </div>
+
+        <div class="browser-footer">
+            <span id="status-text">System Ready</span>
+            <span id="connection-info">TLS 1.3 Encrypted</span>
+            <span id="load-time">Load: 0.2s</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
