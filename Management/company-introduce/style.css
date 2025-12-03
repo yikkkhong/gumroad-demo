@@ -123,7 +123,8 @@ nav.scrolled {
 /* --- Hero Section --- */
 .hero {
     height: 100vh;
-    background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop'); /* Skyscaper BG */
+    /* Use a local image placed in `images/image.png`. Replace or change this path as needed. */
+    background-image: url('images/image.jpg'); /* Skyscaper BG (local) */
     background-size: cover;
     background-position: center;
     position: relative;

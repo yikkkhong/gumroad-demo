@@ -21,10 +21,10 @@ A small, reusable template for company introduction websites. This repository co
 - **CSS line**: Use the following line in your stylesheet to set a demo background image:
 
 ```
-background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop'); /* Meeting room */
+background-image: url('images/image.png'); /* Local demo image: place your image at images/image.png or change this path */
 ```
 
-Note: This Unsplash image is included for demo purposes only and must NOT be bundled into a production system. Replace it with a properly licensed image or a local asset before release.
+Note: The template can use a local demo image placed at `images/image.png`. If you prefer a different filename or folder, update the path in `style.css` accordingly. Replace demo images with properly licensed assets before releasing to production.
 
 **Files in this folder**
 - `index.html` — demo HTML page
@@ -53,7 +53,7 @@ Note: This Unsplash image is included for demo purposes only and must NOT be bun
 
 ```css
 :root{--brand:#0b66ff;--bg:#f5f7fb}
-.hero{background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop');
+.hero{background-image: url('images/image.png'); /* local demo image */
 	background-size: cover;
 	background-position: center;
 	background-color: var(--bg); /* fallback color */
