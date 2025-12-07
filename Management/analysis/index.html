@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Name | Enterprise Data Console</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo-icon"></div>
+                <span>Company Name</span>
+            </div>
+            <nav>
+                <a href="#" class="active">Dashboard</a>
+                <a href="#">Real-time Analysis</a>
+                <a href="#">Data Sources</a>
+                <a href="#">System Health</a>
+                <a href="#">Settings</a>
+            </nav>
+            <div class="system-status">
+                <p>SERVER: <span class="status-ok">ONLINE</span></p>
+                <p>LATENCY: <span id="latency-meter">12ms</span></p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <h1>Data Analysis Console</h1>
+                <div class="actions">
+                    <button id="theme-toggle" class="btn secondary" title="Switch Theme">
+                        <span id="theme-icon">☀</span>
+                    </button>
+                    
+                    <button id="run-analysis-btn" class="btn primary">
+                        <span class="icon">▶</span> Run Deep Analysis
+                    </button>
+                    <div class="user-profile">AD</div>
+                </div>
+            </header>
+
+            <section class="kpi-grid">
+                <div class="card kpi-card">
+                    <h3>Total Data Points</h3>
+                    <div class="value" id="kpi-1">0</div>
+                    <div class="trend positive">↑ 12.5%</div>
+                </div>
+                <div class="card kpi-card">
+                    <h3>Processing Speed</h3>
+                    <div class="value" id="kpi-2">0 ops/s</div>
+                    <div class="trend neutral">Stable</div>
+                </div>
+                <div class="card kpi-card">
+                    <h3>Anomalies Detected</h3>
+                    <div class="value warning" id="kpi-3">0</div>
+                    <div class="trend negative">Attention Required</div>
+                </div>
+                <div class="card kpi-card">
+                    <h3>Model Accuracy</h3>
+                    <div class="value" id="kpi-4">0%</div>
+                    <div class="trend positive">↑ 0.4%</div>
+                </div>
+            </section>
+
+            <section class="analysis-section">
+                <div class="card chart-container">
+                    <div class="card-header">
+                        <h2>Live Throughput Visualizer</h2>
+                        <div class="chart-legend">
+                            <span class="dot input"></span> Input
+                            <span class="dot output"></span> Output
+                        </div>
+                    </div>
+                    <div class="bar-chart-wrapper" id="main-chart">
+                        </div>
+                </div>
+            </section>
+
+            <section class="data-section">
+                <div class="card table-container">
+                    <div class="card-header">
+                        <h2>Dataset Inspection</h2>
+                        <button class="btn secondary">Export CSV</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Timestamp</th>
+                                    <th>Source Node</th>
+                                    <th>Integrity Score</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="data-table-body">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
