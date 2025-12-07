@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Bakery Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="game-container">
+        <!-- Shop Sign -->
+        <div id="shop-sign">
+            <h2>🥐 THE PIXEL BAKERY 🍞</h2>
+        </div>
+
+        <!-- Windows -->
+        <div class="window" id="window1"></div>
+        <div class="window" id="window2"></div>
+
+        <!-- UI Layer -->
+        <div id="ui-layer">
+            <p>🎮 ARROW KEYS to move<br>⌨️ SPACE to interact</p>
+        </div>
+        
+        <div class="controls-hint">Walk to breads to view projects!<br>Diagonal movement supported</div>
+
+        <!-- Furniture -->
+        <div class="shelf" id="shelf-back"></div>
+        <div class="obstacle" id="counter"></div>
+        <div class="obstacle display-case" id="case-left"></div>
+        <div class="obstacle display-case" id="case-right"></div>
+
+        <!-- Plant -->
+        <div id="plant">
+            <div class="pot"></div>
+            <div class="leaves"></div>
+        </div>
+
+        <!-- BREADS (Projects) -->
+        <div class="bread bread-croissant" style="left: 240px; top: 115px;" data-id="1">
+            <div class="croissant-body">
+                <div class="croissant-layer1"></div>
+                <div class="croissant-layer2"></div>
+                <div class="croissant-layer3"></div>
+                <div class="croissant-layer4"></div>
+            </div>
+        </div>
+
+        <div class="bread bread-baguette" style="left: 400px; top: 115px;" data-id="2">
+            <div class="baguette-body">
+                <div class="baguette-score"></div>
+                <div class="baguette-score"></div>
+                <div class="baguette-score"></div>
+                <div class="baguette-score"></div>
+                <div class="baguette-score"></div>
+            </div>
+        </div>
+
+        <div class="bread bread-cake" style="left: 75px; top: 240px;" data-id="3">
+            <div class="cake-body">
+                <div class="cake-frosting"></div>
+                <div class="cake-base"></div>
+                <div class="cake-cherry"></div>
+            </div>
+        </div>
+
+        <div class="bread bread-donut" style="right: 75px; top: 240px;" data-id="4">
+            <div class="donut-body">
+                <div class="donut-outer"></div>
+                <div class="donut-icing">
+                    <div class="donut-sprinkle"></div>
+                    <div class="donut-sprinkle"></div>
+                    <div class="donut-sprinkle"></div>
+                </div>
+                <div class="donut-inner"></div>
+            </div>
+        </div>
+
+        <div class="bread bread-pretzel" style="left: 320px; top: 65px;" data-id="5">
+            <div class="pretzel-body">
+                <div class="pretzel-loop"></div>
+                <div class="pretzel-loop"></div>
+                <div class="pretzel-center"></div>
+                <div class="pretzel-salt"></div>
+                <div class="pretzel-salt"></div>
+                <div class="pretzel-salt"></div>
+            </div>
+        </div>
+
+        <!-- PLAYER -->
+        <div id="player" style="left: 300px; top: 350px;">
+            <div class="player-container">
+                <div class="chef-hat"></div>
+                <div class="player-head"></div>
+                <div class="player-smile"></div>
+                <div class="player-body"></div>
+                <div class="player-arm left"></div>
+                <div class="player-arm right"></div>
+                <div class="player-shadow"></div>
+            </div>
+            <div id="interaction-prompt">PRESS SPACE</div>
+        </div>
+        <!-- Visual overlay for showing colliders / interaction zones -->
+        <canvas id="overlay-canvas" aria-hidden="true"></canvas>
+        <button id="overlay-toggle" title="Toggle overlays (F1)">Show Overlays</button>
+    </div>
+
+    <!-- MODAL -->
+    <div id="modal-overlay">
+        <div class="rpg-box">
+            <h2 id="modal-title">Project Title</h2>
+            <p id="modal-desc">Description...</p>
+            <p style="color: #FFD700; font-size: 18px; margin-top: 15px;" id="modal-tech">Tech Stack</p>
+            <button class="btn-close" onclick="closeModal()">CLOSE [ESC]</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
